@@ -4,12 +4,14 @@
       <ul class="product-list">
         <ItemCard :item="item" v-for="item in data" :key="item.uuid"/>
       </ul>
+      <Pagination />
     </div>
   </main>
 </template>
 
 <script>
 import ItemCard from './ItemCard'
+import Pagination from './Pagination'
 import restService from '../api/service'
 
 export default {
@@ -21,6 +23,7 @@ export default {
   },
   components: {
     ItemCard,
+    Pagination
   },
   mounted () {
     restService.getStore().then(res => {
