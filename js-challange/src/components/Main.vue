@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Header />
+    <Header @setCartHover="setCartHover" />
+    <Cart :items="itemsInCart" v-show="cartHover" />
     <main class="product-page">
       <div class="container">
         <ul class="product-list">
@@ -21,6 +22,7 @@
 
 <script>
 import ItemCard from './ItemCard'
+import Cart from './Cart'
 import Header from './Header'
 import Footer from './Footer'
 import Pagination from './Pagination'
@@ -33,10 +35,13 @@ export default {
       data: [],
       itemsPerPage: 6,
 
-      itemsInCart: []
+      itemsInCart: [],
+
+      cartHover: false
     }
   },
   components: {
+    Cart,
     ItemCard,
     Pagination,
     Footer,
@@ -55,6 +60,9 @@ export default {
     removeFromCart (item) {
       const index = this.itemsInCart.findIndex(itemInCart => itemInCart.uuid === item.uuid)
       index > -1 ? this.itemsInCart.splice(index, 1) : false
+    },
+    setCartHover (hover) {
+      this.cartHover = hover
     }
   },
   mounted () {

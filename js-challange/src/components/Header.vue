@@ -2,7 +2,7 @@
     <header class="header container">
         <h1 class="page-title">BRAND</h1>
         <aside class="header-bag">
-            <div class="header-bag__item header-bag__count">
+            <div class="header-bag__item header-bag__count" @mouseover="mouseover" @mouseleave="mouseleave">
                 <div class="header-bag__price">
                     {{ totalPrice }}
                 </div>
@@ -32,6 +32,14 @@ export default {
         bagIcon: Bag,
         wishlistIcon: Wishlist
     }
+  },
+  methods: {
+      mouseover () {
+          this.$emit('setCartHover', true)
+      },
+      mouseleave () {
+          this.$emit('setCartHover', false)
+      }
   }
 }
 </script>
