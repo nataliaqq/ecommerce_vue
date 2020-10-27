@@ -4,14 +4,14 @@
         <aside class="header-bag">
             <div class="header-bag__item header-bag__count">
                 <div class="header-bag__price">
-                    £210
+                    {{ totalPrice }}
                 </div>
                 <img :src="bagIcon">
-                <span class="bag__item-counter">10</span>
+                <span class="bag__item-counter">{{ totalItems }}</span>
             </div>
             <div class="header-bag__item header-bag__wishlist-count">
                 <img :src="wishlistIcon">
-                <span class="bag__item-counter">5</span>
+                <span class="bag__item-counter">{{ totalWishlist }}</span>
             </div>
         </aside>
     </header>
@@ -26,7 +26,9 @@ export default {
   name: 'Header',
   data () {
     return {
-        bagIcon: Bag
+        totalPrice: 0,
+        totalItems: 0,
+        totalWishlist: 0,
         bagIcon: Bag,
         wishlistIcon: Wishlist
     }
