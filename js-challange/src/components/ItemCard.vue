@@ -2,7 +2,7 @@
     <li class="product-list__item">
       <article class="product" itemscope itemtype="http://schema.org/Product">
           <figure class="product__image-wrapper">
-              <img class="product__image" src="images/activity_image.jpeg" alt="Product" itemprop="image"/>
+              <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=300`" :alt="item.title" itemprop="image"/>
               <button class="product__wishlist-button button button--round button--wishlist">
                   <svg class="icon" width="20px" height="20px" viewBox="0 6 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Wishlist Icon</title>
@@ -11,10 +11,11 @@
               </button>
           </figure>
           <div class="product__details">
-              <h1 class="product__title" itemprop="brand">Product Title</h1>
-              <p class="product__subtitle" itemprop="description">Product Description</p>
+              <h1 class="product__title" itemprop="brand">{{ item.title }}</h1>
+              <p class="product__subtitle" itemprop="description">{{ item.description }}</p>
               <div class="product__price" itemscope itemtype="http://schema.org/Offer">
-                  <span class="product__price--strike">£210</span><span class="product__price--discounted" itemprop="price">£210</span>
+                  <span class="product__price--strike" v-if="isDiscounted(item)">{{ item.retail_price.formatted_value }}</span>
+                  <span :class="isDiscounted(item) ? 'product__price--discounted' : 'product__price'" itemprop="price">{{ getPrice(item) }}</span>
               </div>
               <button class="product__add-to-cart button button--primary">Add to Cart</button>
           </div>
