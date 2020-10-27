@@ -1,16 +1,20 @@
 <template>
-  <main class="product-page">
-    <div class="container">
-      <ul class="product-list">
-        <ItemCard :item="item" v-for="item in data" :key="item.uuid"/>
-      </ul>
-      <Pagination @loadPage="loadPage"/>
-    </div>
-  </main>
+  <div>
+    <main class="product-page">
+      <div class="container">
+        <ul class="product-list">
+          <ItemCard :item="item" v-for="item in data" :key="item.uuid"/>
+        </ul>
+        <Pagination @loadPage="loadPage"/>
+      </div>
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script>
 import ItemCard from './ItemCard'
+import Footer from './Footer'
 import Pagination from './Pagination'
 import restService from '../api/service'
 
@@ -24,7 +28,8 @@ export default {
   },
   components: {
     ItemCard,
-    Pagination
+    Pagination,
+    Footer
   },
   methods: {
     loadPage (page) {
