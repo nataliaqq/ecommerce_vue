@@ -4,7 +4,13 @@
     <main class="product-page">
       <div class="container">
         <ul class="product-list">
-          <ItemCard :item="item" v-for="item in data" :key="item.uuid"/>
+          <ItemCard
+            :item="item"
+            v-for="item in data"
+            :key="item.uuid"
+            @addToCart="addToCart"
+            @removeFromCart="removeFromCart"
+            :itemsInCart="itemsInCart" />
         </ul>
         <Pagination @loadPage="loadPage"/>
       </div>
@@ -26,6 +32,8 @@ export default {
     return {
       data: [],
       itemsPerPage: 6,
+
+      itemsInCart: []
     }
   },
   components: {
@@ -40,6 +48,13 @@ export default {
       restService.getStore({ limit: this.itemsPerPage, offset: offset }).then(res => {
         this.data = res?.data || []
       })
+    },
+    addToCart (item) {
+      this.itemsInCart.push(item)
+    },
+    removeFromCart (item) {
+      const index = this.itemsInCart.findIndex(itemInCart => itemInCart.uuid === item.uuid)
+      index > -1 ? this.itemsInCart.splice(index, 1) : false
     }
   },
   mounted () {
