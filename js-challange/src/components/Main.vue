@@ -8,7 +8,7 @@
 import restService from '../api/service'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Main',
   data () {
     return {
       data: []
