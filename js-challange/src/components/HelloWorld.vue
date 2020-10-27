@@ -1,14 +1,27 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    {{ data }}
   </div>
 </template>
 
 <script>
+import restService from '../api/service'
+
 export default {
   name: 'HelloWorld',
+  data () {
+    return {
+      data: []
+    }
+  },
   props: {
-    msg: String
+    mdatasg: String
+  },
+  mounted () {
+    restService.getStore().then(res => {
+      console.log(res)
+      this.data = res?.data || []
+    })
   }
 }
 </script>
