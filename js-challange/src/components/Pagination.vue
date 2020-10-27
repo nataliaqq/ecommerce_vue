@@ -6,7 +6,7 @@
                     <img :src="arrowLeft">
                 </a>
             </li>
-            <li class="pagination__item" v-for="page in 10" :key="page">
+            <li class="pagination__item" v-for="page in 12" :key="page">
                 <a href="#" class="pagination__link" @click="goToPage(page)">
                     {{ page }}
                 </a>
@@ -39,13 +39,16 @@ export default {
       nextPage () {
           if (this.currentPage >= this.maxPage) return
           this.currentPage++
+          this.$emit('loadPage', this.currentPage)
       },
       prevPage () {
           if (this.currentPage <= this.minPage) return
           this.currentPage--
+          this.$emit('loadPage', this.currentPage)
       },
       goToPage (newPage) {
           this.currentPage = newPage
+          this.$emit('loadPage', this.currentPage)
       }
   },
 }
