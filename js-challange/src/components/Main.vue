@@ -1,10 +1,13 @@
 <template>
   <div class="hello">
-    {{ data }}
+    <div v-for="item in data" :key="item.uuid">
+      <ItemCard :item="item" />
+    </div>
   </div>
 </template>
 
 <script>
+import ItemCard from './ItemCard'
 import restService from '../api/service'
 
 export default {
@@ -14,8 +17,8 @@ export default {
       data: []
     }
   },
-  props: {
-    mdatasg: String
+  components: {
+    ItemCard,
   },
   mounted () {
     restService.getStore().then(res => {
