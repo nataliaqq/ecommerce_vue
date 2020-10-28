@@ -78,4 +78,17 @@ export default {
 .product__wishlist-button.item-in-wishlist {
   fill: white;
 }
+
+@media (max-width: 768px) {
+  .product-list__item {
+    flex: 1 0 50%;
+    max-width: 50%;
+  }
+}
+@media (max-width: 560px) {
+  .product-list__item {
+    flex: 1 0 100%;
+    max-width: 100%;
+  }
+}
 </style>
