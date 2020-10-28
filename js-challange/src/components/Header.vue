@@ -87,6 +87,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+header {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+}
 aside {
     height: 100%;
     align-items: center;
