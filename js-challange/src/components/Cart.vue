@@ -2,15 +2,19 @@
     <div class="cart" v-if="items.length">
         <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
             <div class="product-in-cart__image-container">
-                <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=100`" :alt="item.title" itemprop="image"/>
+                <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=200`" :alt="item.title" itemprop="image"/>
             </div>
             <div>
-                <div>{{ item.title }}</div>
-                <div>{{ item.retail_price.formatted_value }}</div>
+                <div class="trunc-3">{{ item.title }}</div>
+                <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
             <div @click="removeFromCart(item)" class="remove-btn">x</div>
         </div>
-        {{ total }}
+
+        <div class="total">
+            <div>Total:</div>
+            <div class="total-amount">{{ total | money }}</div>
+        </div>
     </div>
 </template>
 
@@ -27,6 +31,11 @@ export default {
           return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
       }
   },
+  filters: {
+      money (value) {
+          return '€ ' + value.toFixed(2)
+      }
+  },
   methods: {
     ...mapMutations([
       'removeFromCart'
@@ -38,20 +47,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cart {
-    width: 300px;
-    border: 1px solid grey;
+    width: 350px;
+    border: 1px solid lightgrey;
     position: absolute;
     right: 10px;
     background: white;
     z-index: 9;
-    padding: 10px;
 }
 .product-in-cart__container {
     display: flex;
-    padding-bottom: 10px;
+    padding: 15px 20px;
+}
+.product-in-cart__container:nth-child(2n) {
+    background-color: #ececec;
 }
 .product-in-cart__image-container {
+    flex-basis: 200px;
     padding-right: 10px;
+    min-width: 100px;
 }
 
 .remove-btn {
@@ -60,5 +73,29 @@ export default {
     font-size: 20px;
     align-self: center;
     padding: 0 10px;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.total {
+    font-size: 14px;
+    padding: 20px;
+    border-top: 1px solid lightgray;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.total-amount {
+    font-weight: bold;
+}
+
+.trunc-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
