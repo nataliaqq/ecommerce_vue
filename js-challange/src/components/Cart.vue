@@ -10,6 +10,8 @@
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
             <div @click="remove(item)" class="remove-btn">x</div>
+            <div v-if="!isItemInCart(item)" @click="moveToCart(item)">Move to cart</div>
+            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)">Move to wishlist</div>
         </div>
 
         <div class="total" v-if="showTotal">
@@ -36,6 +38,18 @@ export default {
   methods: {
     remove (item) {
         this.$emit('removeItem', item)
+    },
+    moveToCart (item) {
+        this.$emit('moveToCart', item)
+    },
+    moveToWishlist (item) {
+        this.$emit('moveToWishlist', item)
+    },
+    isItemInCart (item) {
+      return !!this.itemsInCart.find(itemInCart => itemInCart.uuid === item.uuid)
+    },
+    isItemInWishlist (item) {
+      return !!this.itemsInWishlist.find(itemInWishlist => itemInWishlist.uuid === item.uuid)
     }
   }
 }

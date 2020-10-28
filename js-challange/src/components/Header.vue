@@ -13,6 +13,8 @@
                 <Cart
                     v-show="cartHover"
                     :items="$store.state.itemsInCart"
+                    @addToWishlist="addToWishlist"
+                    @moveToWishlist="moveToWishlist"
                     @removeItem="removeFromCart"
                     title="Your cart"
                 />
@@ -25,9 +27,10 @@
                  <Cart
                     v-show="wishlistHover"
                     :items="$store.state.itemsInWishlist"
-                    @removeItem="removeFromWishlist"
-                    title="In your wishlist"
                     :showTotal="false"
+                    @removeItem="removeFromWishlist"
+                    @moveToCart="moveToCart"
+                    title="In your wishlist"
                 />
             </div>
         </aside>
@@ -59,6 +62,8 @@ export default {
   },
   methods: {
     ...mapMutations([
+      'addToCart',
+      'addToWishlist',
       'removeFromCart',
       'removeFromWishlist'
     ]),
@@ -67,6 +72,14 @@ export default {
     },
     setWishlistHover (hover) {
       this.wishlistHover = hover
+    },
+    moveToWishlist (item) {
+        this.addToWishlist(item)
+        this.removeFromCart(item)
+    },
+    moveToCart (item) {
+        this.addToCart(item)
+        this.removeFromWishlist(item)
     }
   }
 }
