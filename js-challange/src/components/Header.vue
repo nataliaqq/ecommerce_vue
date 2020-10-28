@@ -2,7 +2,7 @@
     <header class="header container">
         <h1 class="page-title">BRAND</h1>
         <aside class="header-bag">
-            <div class="header-item-wrapper" @mouseover="mouseoverCart" @mouseleave="mouseleaveCart">
+            <div class="header-item-wrapper" @mouseover="setCartHover(true)" @mouseleave="setCartHover(false)">
                 <div class="header-bag__item header-bag__count">
                     <div class="header-bag__price">
                         {{ totalPrice | money }}
@@ -10,12 +10,25 @@
                     <img :src="bagIcon">
                     <span class="bag__item-counter">{{ itemsInCart.length }}</span>
                 </div>
+                <Cart
+                    v-show="cartHover"
+                    :items="$store.state.itemsInCart"
+                    @removeItem="removeFromCart"
+                    title="Your cart"
+                />
             </div>
-            <div class="header-item-wrapper" @mouseover="mouseoverWishlist" @mouseleave="mouseleaveWishlist">
+            <div class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
                 <div class="header-bag__item header-bag__wishlist-count">
                     <WishlistIcon />
                     <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
                 </div>
+                 <Cart
+                    v-show="wishlistHover"
+                    :items="$store.state.itemsInWishlist"
+                    @removeItem="removeFromWishlist"
+                    title="In your wishlist"
+                    :showTotal="false"
+                />
             </div>
         </aside>
     </header>
@@ -24,8 +37,10 @@
 <script>
 
 import Bag from '../assets/svg/bag.svg';
+import Cart from './Cart';
 import WishlistIcon from '../assets/svg/wishlist';
 import mixin from '../mixins';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Header',
@@ -33,24 +48,26 @@ export default {
   data () {
     return {
         bagIcon: Bag,
+
+        cartHover: false,
+        wishlistHover: false
     }
   },
   components: {
+      Cart,
       WishlistIcon
   },
   methods: {
-      mouseoverCart () {
-          this.$emit('setCartHover', true)
-      },
-      mouseleaveCart () {
-          this.$emit('setCartHover', false)
-      },
-      mouseoverWishlist () {
-          this.$emit('setWishlistHover', true)
-      },
-      mouseleaveWishlist () {
-          this.$emit('setWishlistHover', false)
-      }
+    ...mapMutations([
+      'removeFromCart',
+      'removeFromWishlist'
+    ]),
+    setCartHover (hover) {
+      this.cartHover = hover
+    },
+    setWishlistHover (hover) {
+      this.wishlistHover = hover
+    }
   }
 }
 </script>

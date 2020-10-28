@@ -53,6 +53,7 @@ export default {
     border: 1px solid lightgrey;
     position: absolute;
     right: 10px;
+    top: 50px;
     background: white;
     z-index: 9;
 }
