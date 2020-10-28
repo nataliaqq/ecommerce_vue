@@ -9,7 +9,7 @@
                 <div class="trunc-3">{{ item.title }}</div>
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
-            <div @click="remove(item)" class="remove-btn">x</div>
+            <div @click="remove(item)" class="remove-btn"></div>
             <div v-if="!isItemInCart(item)" @click="moveToCart(item)">Move to cart</div>
             <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)">Move to wishlist</div>
         </div>
@@ -84,11 +84,29 @@ export default {
 }
 
 .remove-btn {
+    width: 20px;
+    height: 20px;
+    position: relative;
     cursor: pointer;
-    color: red;
-    font-size: 20px;
-    align-self: center;
     padding: 0 10px;
+    align-self: center;
+}
+.remove-btn:after {
+    content: '';
+    height: 20px;
+    border-left: 2px solid red;
+    position: absolute;
+    transform: rotate(45deg);
+    left: 4px;
+}
+
+.remove-btn:before {
+    content: '';
+    height: 20px;
+    border-left: 2px solid red;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 4px;
 }
 
 .price {
