@@ -21,20 +21,17 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import mixin from '../mixins';
 
 export default {
   name: 'Cart',
+  mixins: [mixin],
   computed: {
       items () {
           return this.$store.state.itemsInCart
       },
       total () {
           return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
-      }
-  },
-  filters: {
-      money (value) {
-          return '€ ' + value.toFixed(2)
       }
   },
   methods: {

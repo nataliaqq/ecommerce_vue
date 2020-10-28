@@ -1,5 +1,5 @@
 <template>
-    <div class="cart" v-if="items.length">
+    <div class="cart" v-if="items && items.length">
         <div class="title">In your wishlist</div>
         <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
             <div class="product-in-cart__image-container">

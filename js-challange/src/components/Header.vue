@@ -4,7 +4,7 @@
         <aside class="header-bag">
             <div class="header-bag__item header-bag__count" @mouseover="mouseoverCart" @mouseleave="mouseleaveCart">
                 <div class="header-bag__price">
-                    {{ totalPrice }}
+                    {{ totalPrice | money }}
                 </div>
                 <img :src="bagIcon">
                 <span class="bag__item-counter">{{ itemsInCart.length }}</span>
@@ -21,12 +21,13 @@
 
 import Bag from '../assets/svg/bag.svg';
 import WishlistIcon from '../assets/svg/wishlist';
+import mixin from '../mixins';
 
 export default {
   name: 'Header',
+  mixins: [mixin],
   data () {
     return {
-        totalPrice: 0,
         bagIcon: Bag,
     }
   },
@@ -34,9 +35,6 @@ export default {
       WishlistIcon
   },
   computed: {
-      itemsInCart () {
-          return this.$store.state.itemsInCart
-      },
       itemsInWishlist () {
         return this.$store.state.itemsInWishlist
       }
@@ -62,5 +60,8 @@ export default {
 <style scoped>
 .header-bag__item {
     cursor: pointer;
+}
+.header-bag__price {
+    padding-right: 10px;
 }
 </style>
