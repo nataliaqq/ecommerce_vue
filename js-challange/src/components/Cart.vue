@@ -1,6 +1,6 @@
 <template>
     <div class="cart" v-if="items.length">
-        <div class="title">Your cart</div>
+        <div class="title">{{ title }}</div>
         <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
             <div class="product-in-cart__image-container">
                 <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=200`" :alt="item.title" itemprop="image"/>
@@ -9,10 +9,10 @@
                 <div class="trunc-3">{{ item.title }}</div>
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
-            <div @click="removeFromCart(item)" class="remove-btn">x</div>
+            <div @click="remove(item)" class="remove-btn">x</div>
         </div>
 
-        <div class="total">
+        <div class="total" v-if="showTotal">
             <div>Total:</div>
             <div class="total-amount">{{ total | money }}</div>
         </div>
@@ -20,24 +20,28 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 import mixin from '../mixins';
 
 export default {
   name: 'Cart',
   mixins: [mixin],
+  props: {
+      items: Array,
+      title: String,
+      showTotal: {
+          type: Boolean,
+          default: true
+      }
+  },
   computed: {
-      items () {
-          return this.$store.state.itemsInCart
-      },
       total () {
           return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
       }
   },
   methods: {
-    ...mapMutations([
-      'removeFromCart'
-    ]),
+    remove (item) {
+        this.$emit('removeItem', item)
+    }
   }
 }
 </script>
