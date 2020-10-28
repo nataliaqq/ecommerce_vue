@@ -8,12 +8,15 @@
                 <div>{{ item.title }}</div>
                 <div>{{ item.retail_price.formatted_value }}</div>
             </div>
+            <div @click="removeFromCart(item)" class="remove-btn">x</div>
         </div>
         {{ total }}
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Cart',
   computed: {
@@ -23,6 +26,11 @@ export default {
       total () {
           return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
       }
+  },
+  methods: {
+    ...mapMutations([
+      'removeFromCart'
+    ]),
   }
 }
 </script>
@@ -44,5 +52,13 @@ export default {
 }
 .product-in-cart__image-container {
     padding-right: 10px;
+}
+
+.remove-btn {
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+    align-self: center;
+    padding: 0 10px;
 }
 </style>
