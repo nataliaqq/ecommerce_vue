@@ -16,10 +16,10 @@
 <script>
 export default {
   name: 'Cart',
-  props: {
-      items: Array,
-  },
   computed: {
+      items () {
+          return this.$store.state.itemsInCart
+      },
       total () {
           return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
       }

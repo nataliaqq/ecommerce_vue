@@ -32,8 +32,10 @@ export default {
         wishlistIcon: Wishlist
     }
   },
-  props: {
-      itemsInCart: Array,
+  computed: {
+      itemsInCart () {
+          return this.$store.state.itemsInCart
+      },
   },
   methods: {
       mouseover () {

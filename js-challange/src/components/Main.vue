@@ -1,17 +1,14 @@
 <template>
   <div>
-    <Header @setCartHover="setCartHover" :itemsInCart="itemsInCart" />
-    <Cart :items="itemsInCart" v-show="cartHover" />
+    <Header @setCartHover="setCartHover" />
+    <Cart v-show="cartHover" />
     <main class="product-page">
       <div class="container">
         <ul class="product-list">
           <ItemCard
             :item="item"
             v-for="item in data"
-            :key="item.uuid"
-            @addToCart="addToCart"
-            @removeFromCart="removeFromCart"
-            :itemsInCart="itemsInCart" />
+            :key="item.uuid" />
         </ul>
         <Pagination @loadPage="loadPage"/>
       </div>
@@ -35,9 +32,12 @@ export default {
       data: [],
       itemsPerPage: 6,
 
-      itemsInCart: [],
-
       cartHover: false
+    }
+  },
+  computed: {
+    itemsInCart () {
+      return this.$store.state.itemsInCart
     }
   },
   components: {
@@ -53,13 +53,6 @@ export default {
       restService.getStore({ limit: this.itemsPerPage, offset: offset }).then(res => {
         this.data = res?.data || []
       })
-    },
-    addToCart (item) {
-      this.itemsInCart.push(item)
-    },
-    removeFromCart (item) {
-      const index = this.itemsInCart.findIndex(itemInCart => itemInCart.uuid === item.uuid)
-      index > -1 ? this.itemsInCart.splice(index, 1) : false
     },
     setCartHover (hover) {
       this.cartHover = hover

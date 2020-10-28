@@ -14,7 +14,7 @@
                 <span class="product__price--strike" v-if="isDiscounted(item)">{{ item.retail_price.formatted_value }}</span>
                 <span :class="isDiscounted(item) ? 'product__price--discounted' : 'product__price'" itemprop="price">{{ getPrice(item) }}</span>
             </div>
-            <button class="product__add-to-cart button button--primary" :class="isItemInCart(item) ? 'item-in-cart' : ''" @click="isItemInCart(item) ? removeFromCart(item) : addToCart(item)">
+            <button class="product__add-to-cart button button--primary" :class="isItemInCart(item) ? 'item-in-cart' : ''" @click="isItemInCart(item) ? remove(item) : add(item)">
               {{ isItemInCart(item) ? 'Remove from Cart' : 'Add to Cart' }}
             </button>
         </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import Wishlist from '../assets/svg/wishlist.svg';
 
 export default {
@@ -32,12 +34,20 @@ export default {
       wishlistIcon: Wishlist
     }
   },
+  computed: {
+    itemsInCart () {
+      return this.$store.state.itemsInCart
+    }
+  },
   // @TODO props validation
   props: {
     item: Object,
-    itemsInCart: Array
   },
   methods: {
+    ...mapMutations([
+      'addToCart',
+      'removeFromCart'
+    ]),
     isDiscounted (item) {
       return item?.discount > 0
     },
@@ -45,11 +55,11 @@ export default {
       // if discount prop is greather than 0, full price is net_price.formatted_value (to be shown as striked) and final price will be retail_price.formatted_value -->
       return this.isDiscounted(item) ? item?.net_price?.formatted_value : item?.retail_price?.formatted_value
     },
-    addToCart (item) {
-      this.$emit('addToCart', item)
+    add (item) {
+      this.addToCart(item)
     },
-    removeFromCart (item) {
-      this.$emit('removeFromCart', item)
+    remove (item) {
+      this.removeFromCart(item)
     },
     isItemInCart (item) {
       return !!this.itemsInCart.find(itemInCart => itemInCart.uuid === item.uuid)
