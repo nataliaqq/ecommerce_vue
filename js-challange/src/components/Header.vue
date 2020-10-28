@@ -2,16 +2,16 @@
     <header class="header container">
         <h1 class="page-title">BRAND</h1>
         <aside class="header-bag">
-            <div class="header-bag__item header-bag__count" @mouseover="mouseover" @mouseleave="mouseleave">
+            <div class="header-bag__item header-bag__count" @mouseover="mouseoverCart" @mouseleave="mouseleaveCart">
                 <div class="header-bag__price">
                     {{ totalPrice }}
                 </div>
                 <img :src="bagIcon">
                 <span class="bag__item-counter">{{ itemsInCart.length }}</span>
             </div>
-            <div class="header-bag__item header-bag__wishlist-count">
-                <img :src="wishlistIcon">
-                <span class="bag__item-counter">{{ totalWishlist }}</span>
+            <div class="header-bag__item header-bag__wishlist-count" @mouseover="mouseoverWishlist" @mouseleave="mouseleaveWishlist">
+                <WishlistIcon />
+                <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
             </div>
         </aside>
     </header>
@@ -20,29 +20,39 @@
 <script>
 
 import Bag from '../assets/svg/bag.svg';
-import Wishlist from '../assets/svg/wishlist.svg';
+import WishlistIcon from '../assets/svg/wishlist';
 
 export default {
   name: 'Header',
   data () {
     return {
         totalPrice: 0,
-        totalWishlist: 0,
         bagIcon: Bag,
-        wishlistIcon: Wishlist
     }
+  },
+  components: {
+      WishlistIcon
   },
   computed: {
       itemsInCart () {
           return this.$store.state.itemsInCart
       },
+      itemsInWishlist () {
+        return this.$store.state.itemsInWishlist
+      }
   },
   methods: {
-      mouseover () {
+      mouseoverCart () {
           this.$emit('setCartHover', true)
       },
-      mouseleave () {
+      mouseleaveCart () {
           this.$emit('setCartHover', false)
+      },
+      mouseoverWishlist () {
+          this.$emit('setWishlistHover', true)
+      },
+      mouseleaveWishlist () {
+          this.$emit('setWishlistHover', false)
       }
   }
 }

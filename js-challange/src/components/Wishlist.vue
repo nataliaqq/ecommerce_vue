@@ -1,6 +1,6 @@
 <template>
     <div class="cart" v-if="items.length">
-        <div class="title">Your cart</div>
+        <div class="title">In your wishlist</div>
         <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
             <div class="product-in-cart__image-container">
                 <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=200`" :alt="item.title" itemprop="image"/>
@@ -9,12 +9,7 @@
                 <div class="trunc-3">{{ item.title }}</div>
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
-            <div @click="removeFromCart(item)" class="remove-btn">x</div>
-        </div>
-
-        <div class="total">
-            <div>Total:</div>
-            <div class="total-amount">{{ total | money }}</div>
+            <div @click="removeFromWishlist(item)" class="remove-btn">x</div>
         </div>
     </div>
 </template>
@@ -23,23 +18,18 @@
 import { mapMutations } from 'vuex'
 
 export default {
-  name: 'Cart',
+  name: 'Wishlist',
   computed: {
       items () {
-          return this.$store.state.itemsInCart
+          return this.$store.state.itemsInWishlist
       },
       total () {
           return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
       }
   },
-  filters: {
-      money (value) {
-          return '€ ' + value.toFixed(2)
-      }
-  },
   methods: {
     ...mapMutations([
-      'removeFromCart'
+      'removeFromWishlist'
     ]),
   }
 }
@@ -81,19 +71,6 @@ export default {
 }
 
 .price {
-    font-weight: bold;
-}
-
-.total {
-    font-size: 14px;
-    padding: 20px;
-    border-top: 1px solid lightgray;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.total-amount {
     font-weight: bold;
 }
 

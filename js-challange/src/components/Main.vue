@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Header @setCartHover="setCartHover" />
+    <Header 
+      @setCartHover="setCartHover"
+      @setWishlistHover="setWishlistHover"
+    />
     <Cart v-show="cartHover" />
+    <Wishlist v-show="wishlistHover" />
     <main class="product-page">
       <div class="container">
         <ul class="product-list">
@@ -23,6 +27,7 @@ import Cart from './Cart'
 import Header from './Header'
 import Footer from './Footer'
 import Pagination from './Pagination'
+import Wishlist from './Wishlist'
 import restService from '../api/service'
 
 export default {
@@ -32,7 +37,8 @@ export default {
       data: [],
       itemsPerPage: 6,
 
-      cartHover: false
+      cartHover: false,
+      wishlistHover: false
     }
   },
   computed: {
@@ -45,7 +51,8 @@ export default {
     ItemCard,
     Pagination,
     Footer,
-    Header
+    Header,
+    Wishlist
   },
   methods: {
     loadPage (page) {
@@ -56,6 +63,9 @@ export default {
     },
     setCartHover (hover) {
       this.cartHover = hover
+    },
+    setWishlistHover (hover) {
+      this.wishlistHover = hover
     }
   },
   mounted () {
