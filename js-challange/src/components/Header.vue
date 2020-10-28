@@ -38,11 +38,6 @@ export default {
   components: {
       WishlistIcon
   },
-  computed: {
-      itemsInWishlist () {
-        return this.$store.state.itemsInWishlist
-      }
-  },
   methods: {
       mouseoverCart () {
           this.$emit('setCartHover', true)
