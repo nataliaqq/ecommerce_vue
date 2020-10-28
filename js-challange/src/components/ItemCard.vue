@@ -14,7 +14,7 @@
                 <span class="product__price--strike" v-if="isDiscounted(item)">{{ item.retail_price.formatted_value }}</span>
                 <span :class="isDiscounted(item) ? 'product__price--discounted' : 'product__price'" itemprop="price">{{ getPrice(item) }}</span>
             </div>
-            <button class="product__add-to-cart button button--primary" :class="isItemInCart(item) ? 'item-in-cart' : ''" @click="isItemInCart(item) ? removeToCart(item) : addToCart(item)">
+            <button class="product__add-to-cart button button--primary" :class="isItemInCart(item) ? 'item-in-cart' : ''" @click="isItemInCart(item) ? removeFromCart(item) : addToCart(item)">
               {{ isItemInCart(item) ? 'Remove from Cart' : 'Add to Cart' }}
             </button>
         </div>
