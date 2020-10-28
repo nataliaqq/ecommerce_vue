@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header @setCartHover="setCartHover" />
+    <Header @setCartHover="setCartHover" :itemsInCart="itemsInCart" />
     <Cart :items="itemsInCart" v-show="cartHover" />
     <main class="product-page">
       <div class="container">

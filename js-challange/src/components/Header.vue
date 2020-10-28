@@ -7,7 +7,7 @@
                     {{ totalPrice }}
                 </div>
                 <img :src="bagIcon">
-                <span class="bag__item-counter">{{ totalItems }}</span>
+                <span class="bag__item-counter">{{ itemsInCart.length }}</span>
             </div>
             <div class="header-bag__item header-bag__wishlist-count">
                 <img :src="wishlistIcon">
@@ -27,11 +27,13 @@ export default {
   data () {
     return {
         totalPrice: 0,
-        totalItems: 0,
         totalWishlist: 0,
         bagIcon: Bag,
         wishlistIcon: Wishlist
     }
+  },
+  props: {
+      itemsInCart: Array,
   },
   methods: {
       mouseover () {
