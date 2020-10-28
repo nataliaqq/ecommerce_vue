@@ -2,16 +2,20 @@
     <header class="header container">
         <h1 class="page-title">BRAND</h1>
         <aside class="header-bag">
-            <div class="header-bag__item header-bag__count" @mouseover="mouseoverCart" @mouseleave="mouseleaveCart">
-                <div class="header-bag__price">
-                    {{ totalPrice | money }}
+            <div class="header-item-wrapper" @mouseover="mouseoverCart" @mouseleave="mouseleaveCart">
+                <div class="header-bag__item header-bag__count">
+                    <div class="header-bag__price">
+                        {{ totalPrice | money }}
+                    </div>
+                    <img :src="bagIcon">
+                    <span class="bag__item-counter">{{ itemsInCart.length }}</span>
                 </div>
-                <img :src="bagIcon">
-                <span class="bag__item-counter">{{ itemsInCart.length }}</span>
             </div>
-            <div class="header-bag__item header-bag__wishlist-count" @mouseover="mouseoverWishlist" @mouseleave="mouseleaveWishlist">
-                <WishlistIcon />
-                <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
+            <div class="header-item-wrapper" @mouseover="mouseoverWishlist" @mouseleave="mouseleaveWishlist">
+                <div class="header-bag__item header-bag__wishlist-count">
+                    <WishlistIcon />
+                    <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
+                </div>
             </div>
         </aside>
     </header>
@@ -58,10 +62,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+aside {
+    height: 100%;
+    align-items: center;
+}
 .header-bag__item {
     cursor: pointer;
 }
 .header-bag__price {
     padding-right: 10px;
+}
+.header-item-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 </style>
