@@ -14,7 +14,7 @@
 
         <div class="total" v-if="showTotal">
             <div>Total:</div>
-            <div class="total-amount">{{ total | money }}</div>
+            <div class="total-amount">{{ totalPrice | money }}</div>
         </div>
     </div>
 </template>
@@ -31,11 +31,6 @@ export default {
       showTotal: {
           type: Boolean,
           default: true
-      }
-  },
-  computed: {
-      total () {
-          return this.items.reduce((acc, item) => acc + item.retail_price.value, 0);
       }
   },
   methods: {
