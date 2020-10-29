@@ -6,10 +6,11 @@
                     <img :src="arrowLeft">
                 </a>
             </li>
-            <li class="pagination__item" v-for="page in 12" :key="page">
-                <a href="#" class="pagination__link" @click="goToPage(page)">
+            <li class="pagination__item" :class="currentPage == page ? 'active' : null" v-for="page in pageArray" :key="page">
+                <a v-if="!isNaN(page)" href="#" class="pagination__link" @click="goToPage(page)">
                     {{ page }}
                 </a>
+                <span v-if="isNaN(page)">{{ page }}</span>
             </li>
             <li class="pagination__item">
                 <a href="#" class="pagination__link" @click="nextPage">
@@ -31,30 +32,71 @@ export default {
           arrowLeft: ArrowLeft,
           arrowRight: ArrowRight,
           currentPage: 1,
-          maxPage: 10,
-          minPage: 1,
+          lastPage: 10,
+          firstPage: 1,
+          delta: 1,
+      }
+  },
+  computed: {
+      // dot pagination. Source: https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
+      left () {
+          return this.currentPage - this.delta
+      },
+      right () {
+          return this.currentPage + this.delta + 1
+      },
+      range () {
+          let range = []
+          for (let i = 1; i <= this.lastPage; i++) {
+                if (i == 1 || i == this.lastPage || i >= this.left && i < this.right) {
+                    range.push(i);
+                }
+            }
+          return range
+      },
+      pageArray () {
+          let rangeWithDots = []
+          let l
+
+            for (let i of this.range) {
+                if (l) {
+                    if (i - l === 2) {
+                        rangeWithDots.push(l + 1);
+                    } else if (i - l !== 1) {
+                        rangeWithDots.push('...');
+                    }
+                }
+                rangeWithDots.push(i);
+                l = i;
+            }
+          return rangeWithDots
       }
   },
   methods: {
       nextPage () {
-          if (this.currentPage >= this.maxPage) return
+          if (this.currentPage >= this.lastPage) return
           this.currentPage++
           this.$emit('loadPage', this.currentPage)
       },
       prevPage () {
-          if (this.currentPage <= this.minPage) return
+          if (this.currentPage <= this.firstPage) return
           this.currentPage--
           this.$emit('loadPage', this.currentPage)
       },
       goToPage (newPage) {
           this.currentPage = newPage
           this.$emit('loadPage', this.currentPage)
-      }
+      },
   },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.pagination__item {
+    font-size: 16px;
+}
+.pagination__item.active {
+    font-weight: bold;
+}
 </style>
