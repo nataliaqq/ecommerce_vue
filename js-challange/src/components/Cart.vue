@@ -31,18 +31,26 @@ import WishlistIcon from '../assets/svg/wishlist';
 
 export default {
   name: 'Cart',
+  components: {
+      BagIcon,
+      WishlistIcon
+  },
   mixins: [mixin],
   props: {
-      items: Array,
-      title: String,
+      items: {
+          type: Array,
+          default () {
+              return []
+          },
+      },
+      title: {
+          type: String,
+          default: ''
+      },
       showTotal: {
           type: Boolean,
           default: true
       }
-  },
-  components: {
-      BagIcon,
-      WishlistIcon
   },
   methods: {
     remove (item) {

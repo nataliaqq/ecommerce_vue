@@ -47,17 +47,17 @@ import { mapMutations } from 'vuex';
 
 export default {
   name: 'Header',
+  components: {
+      BagIcon,
+      Cart,
+      WishlistIcon
+  },
   mixins: [mixin],
   data () {
     return {
         cartHover: false,
         wishlistHover: false
     }
-  },
-  components: {
-      BagIcon,
-      Cart,
-      WishlistIcon
   },
   methods: {
     ...mapMutations([

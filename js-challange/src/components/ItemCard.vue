@@ -1,7 +1,7 @@
 <template>
-  <li class="product-list__item">
+  <li class="product-list__item" v-if="item">
     <article class="product" itemscope itemtype="http://schema.org/Product">
-        <figure class="product__image-wrapper">
+        <figure class="product__image-wrapper" v-if="item.cover_image_url">
             <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=300`" :alt="item.title" itemprop="image"/>
             <button class="product__wishlist-button button button--round button--wishlist" @click="isItemInWishlist(item) ? removeFromWishlist(item) : addToWishlist(item)">
               <WishlistIcon :color="isItemInWishlist(item) ? null : 'lightgrey'" />
@@ -32,6 +32,14 @@ export default {
   components: {
     WishlistIcon
   },
+  props: {
+    item: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
   computed: {
     itemsInCart () {
       return this.$store.state.itemsInCart
@@ -39,10 +47,6 @@ export default {
     itemsInWishlist () {
       return this.$store.state.itemsInWishlist
     }
-  },
-  // @TODO props validation
-  props: {
-    item: Object,
   },
   methods: {
     ...mapMutations([

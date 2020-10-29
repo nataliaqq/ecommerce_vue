@@ -27,6 +27,13 @@ import restService from '../api/service'
 
 export default {
   name: 'Main',
+  components: {
+    ItemCard,
+    Pagination,
+    Footer,
+    Header,
+    Loader
+  },
   data () {
     return {
       data: [],
@@ -35,13 +42,6 @@ export default {
       cartHover: false,
       wishlistHover: false
     }
-  },
-  components: {
-    ItemCard,
-    Pagination,
-    Footer,
-    Header,
-    Loader
   },
   methods: {
     loadPage (page) {
