@@ -10,10 +10,10 @@
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
 
-            <div @click="remove(item)" class="remove-btn"></div>
+            <div @click="remove(item)" class="remove-button"></div>
 
-            <div v-if="!isItemInCart(item)" @click="moveToCart(item)" class="move-to-btn"><BagIcon color="white" /></div>
-            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)" class="move-to-btn"><WishlistIcon color="white" /></div>
+            <div v-if="!isItemInCart(item)" @click="moveToCart(item)" class="move-to-button"><BagIcon color="white" /></div>
+            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)" class="move-to-button"><WishlistIcon color="white" /></div>
 
         </div>
 
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 .cart {
     width: 90%;
     max-width: 500px;
@@ -93,11 +93,10 @@ export default {
     flex-basis: 150px;
     flex-direction: column;
     align-items: center;
-}
-
-.cart__action-buttons .move-to {
-    font-size: 12px;
-    text-decoration: underline;
+    .move-to {
+      font-size: 12px;
+      text-decoration: underline;
+    }
 }
 
 .product-in-cart__container {
@@ -105,10 +104,9 @@ export default {
     align-items: center;
     padding: 15px 50px 15px 20px;
     position: relative;
-}
-
-.product-in-cart__container:nth-child(2n) {
-    background-color: #ececec;
+    &:nth-child(2n) {
+        background-color: #ececec;
+    }
 }
 
 .product-in-cart__image-container {
@@ -117,7 +115,7 @@ export default {
     min-width: 100px;
 }
 
-.remove-btn {
+.remove-button {
     background: white;
     padding: 10px;
     width: 37px;
@@ -128,7 +126,7 @@ export default {
     cursor: pointer;
 }
 
-.move-to-btn {
+.move-to-button {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -141,21 +139,21 @@ export default {
     cursor: pointer;
 }
 
-.remove-btn:after,
-.remove-btn:before {
-    content: '';
-    height: 20px;
-    border-left: 2px solid red;
-    position: absolute;
-    left: 17px;
-}
-
-.remove-btn:after {
-    transform: rotate(45deg);
-}
-
-.remove-btn:before {
-    transform: rotate(-45deg);
+.remove-button {
+    &:after,
+    &:before {
+        content: '';
+        height: 20px;
+        border-left: 2px solid red;
+        position: absolute;
+        left: 17px;
+    }
+    &:after {
+      transform: rotate(45deg);
+    }
+    &:before {
+      transform: rotate(-45deg);
+    }
 }
 
 .price {

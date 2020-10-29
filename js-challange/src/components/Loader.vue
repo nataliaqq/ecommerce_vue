@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .container-loader {
     width: 100%;
     text-align: center;
@@ -13,17 +13,17 @@
   display: inline-block;
   width: 80px;
   height: 80px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 40px;
-  height: 40px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 3px solid grey;
-  border-color: grey transparent grey transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+  &:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 3px solid grey;
+    border-color: grey transparent grey transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
 }
 @keyframes lds-dual-ring {
   0% {
