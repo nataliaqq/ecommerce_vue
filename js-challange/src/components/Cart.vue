@@ -13,7 +13,7 @@
             <div @click="remove(item)" class="remove-btn"></div>
             
             <div v-if="!isItemInCart(item)" @click="moveToCart(item)" class="move-to-btn"><BagIcon color="white" /></div>
-            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)" class="move-to-btn">Move to wishlist</div>
+            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)" class="move-to-btn"><WishlistIcon color="white" /></div>
             
         </div>
 
@@ -27,6 +27,7 @@
 <script>
 import mixin from '../mixins';
 import BagIcon from '../assets/svg/bag';
+import WishlistIcon from '../assets/svg/wishlist';
 
 export default {
   name: 'Cart',
@@ -40,7 +41,8 @@ export default {
       }
   },
   components: {
-      BagIcon
+      BagIcon,
+      WishlistIcon
   },
   methods: {
     remove (item) {
@@ -65,7 +67,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .cart {
-    width: 350px;
+    width: 90%;
+    max-width: 500px;
     border: 1px solid lightgrey;
     position: absolute;
     right: 10px;
@@ -77,13 +80,29 @@ export default {
     padding: 20px;
     font-size: 20px;
 }
+.cart__action-buttons {
+    display: flex;
+    flex-basis: 150px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart__action-buttons .move-to {
+    font-size: 12px;
+    text-decoration: underline;
+}
+
 .product-in-cart__container {
     display: flex;
-    padding: 15px 20px;
+    align-items: center;
+    padding: 15px 50px 15px 20px;
+    position: relative;
 }
+
 .product-in-cart__container:nth-child(2n) {
     background-color: #ececec;
 }
+
 .product-in-cart__image-container {
     flex-basis: 200px;
     padding-right: 10px;
@@ -91,29 +110,44 @@ export default {
 }
 
 .remove-btn {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    cursor: pointer;
-    padding: 0 10px;
-    align-self: center;
-}
-.remove-btn:after {
-    content: '';
-    height: 20px;
-    border-left: 2px solid red;
+    background: white;
+    padding: 10px;
+    width: 37px;
+    height: 37px;
     position: absolute;
-    transform: rotate(45deg);
-    left: 4px;
+    top: 10px;
+    right: 0;
+    cursor: pointer;
 }
 
+.move-to-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 37px;
+    height: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(165, 165, 165);
+    cursor: pointer;
+}
+
+.remove-btn:after,
 .remove-btn:before {
     content: '';
     height: 20px;
     border-left: 2px solid red;
     position: absolute;
+    left: 17px;
+}
+
+.remove-btn:after {
+    transform: rotate(45deg);
+}
+
+.remove-btn:before {
     transform: rotate(-45deg);
-    left: 4px;
 }
 
 .price {
