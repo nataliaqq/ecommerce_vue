@@ -22,72 +22,76 @@
 </template>
 
 <script>
-import ArrowLeft from '../assets/svg/arrow-left.svg';
-import ArrowRight from '../assets/svg/arrow-right.svg';
+import ArrowLeft from '../assets/svg/arrow-left.svg'
+import ArrowRight from '../assets/svg/arrow-right.svg'
 
 export default {
   name: 'Pagination',
   data () {
-      return {
-          arrowLeft: ArrowLeft,
-          arrowRight: ArrowRight,
-          currentPage: 1,
-          lastPage: 10,
-          firstPage: 1,
-          delta: 1,
-      }
+    return {
+      arrowLeft: ArrowLeft,
+      arrowRight: ArrowRight,
+      currentPage: 1,
+      lastPage: 10,
+      firstPage: 1,
+      delta: 1
+    }
   },
   computed: {
-      // dot pagination. Source: https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
-      left () {
-          return this.currentPage - this.delta
-      },
-      right () {
-          return this.currentPage + this.delta + 1
-      },
-      range () {
-          let range = []
-          for (let i = 1; i <= this.lastPage; i++) {
-                if (i == 1 || i == this.lastPage || i >= this.left && i < this.right) {
-                    range.push(i);
-                }
-            }
-          return range
-      },
-      pageArray () {
-          let rangeWithDots = []
-          let l
+    // dot pagination. Source: https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
+    left () {
+      return this.currentPage - this.delta
+    },
+    right () {
+      return this.currentPage + this.delta + 1
+    },
+    range () {
+      const range = []
 
-            for (let i of this.range) {
-                if (l) {
-                    if (i - l === 2) {
-                        rangeWithDots.push(l + 1);
-                    } else if (i - l !== 1) {
-                        rangeWithDots.push('...');
-                    }
-                }
-                rangeWithDots.push(i);
-                l = i;
-            }
-          return rangeWithDots
+      for (let i = 1; i <= this.lastPage; i++) {
+        const isLastOrFirstPage = i === 1 || i === this.lastPage
+        const isInCenter = i >= this.left && i < this.right
+
+        if (isLastOrFirstPage || isInCenter) {
+          range.push(i)
+        }
       }
+      return range
+    },
+    pageArray () {
+      const rangeWithDots = []
+      let l
+
+      for (const i of this.range) {
+        if (l) {
+          if (i - l === 2) {
+            rangeWithDots.push(l + 1)
+          } else if (i - l !== 1) {
+            rangeWithDots.push('...')
+          }
+        }
+        rangeWithDots.push(i)
+        l = i
+      }
+      return rangeWithDots
+    }
   },
   methods: {
-      nextPage () {
-          if (this.currentPage >= this.lastPage) return
-          this.currentPage++
-          this.$emit('loadPage', this.currentPage)
-      },
-      prevPage () {
-          if (this.currentPage <= this.firstPage) return
-          this.currentPage--
-          this.$emit('loadPage', this.currentPage)
-      },
-      goToPage (newPage) {
-          this.currentPage = newPage
-          this.$emit('loadPage', this.currentPage)
-      },
-  },
+    nextPage () {
+      if (this.currentPage >= this.lastPage) return
+      this.currentPage++
+      this.$emit('loadPage', this.currentPage)
+    },
+    prevPage () {
+      if (this.currentPage <= this.firstPage) return
+      this.currentPage--
+      this.$emit('loadPage', this.currentPage)
+    },
+    goToPage (newPage) {
+      this.currentPage = newPage
+      this.$emit('loadPage', this.currentPage)
+    }
+  }
 }
 </script>
 

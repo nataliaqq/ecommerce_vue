@@ -9,11 +9,11 @@
 
 <script>
 export default {
-   props: {
-       color: {
-           type: String,
-           default: '#444A59',
-       }
-   }
+  props: {
+    color: {
+      type: String,
+      default: '#444A59'
+    }
+  }
 }
 </script>

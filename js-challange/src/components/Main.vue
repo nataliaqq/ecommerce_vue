@@ -46,13 +46,13 @@ export default {
   methods: {
     loadPage (page) {
       this.data = []
-      let offset = (page - 1) * this.itemsPerPage
+      const offset = (page - 1) * this.itemsPerPage
       restService.getStore({ limit: this.itemsPerPage, offset: offset }).then(res => {
         this.data = res?.data || []
       })
     }
   },
-  
+
   mounted () {
     restService.getStore().then(res => {
       this.data = res?.data || []

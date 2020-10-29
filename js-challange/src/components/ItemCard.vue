@@ -25,7 +25,7 @@
 <script>
 import { mapMutations } from 'vuex'
 
-import WishlistIcon from '../assets/svg/wishlist';
+import WishlistIcon from '../assets/svg/wishlist'
 
 export default {
   name: 'ItemCard',
@@ -68,7 +68,7 @@ export default {
     isItemInWishlist (item) {
       return !!this.itemsInWishlist.find(itemInWishlist => itemInWishlist.uuid === item.uuid)
     }
-  },
+  }
 }
 </script>
 

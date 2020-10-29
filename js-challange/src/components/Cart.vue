@@ -9,12 +9,12 @@
                 <div class="trunc-3">{{ item.title }}</div>
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
-            
+
             <div @click="remove(item)" class="remove-btn"></div>
-            
+
             <div v-if="!isItemInCart(item)" @click="moveToCart(item)" class="move-to-btn"><BagIcon color="white" /></div>
             <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)" class="move-to-btn"><WishlistIcon color="white" /></div>
-            
+
         </div>
 
         <div class="total" v-if="showTotal">
@@ -25,42 +25,42 @@
 </template>
 
 <script>
-import mixin from '../mixins';
-import BagIcon from '../assets/svg/bag';
-import WishlistIcon from '../assets/svg/wishlist';
+import mixin from '../mixins'
+import BagIcon from '../assets/svg/bag'
+import WishlistIcon from '../assets/svg/wishlist'
 
 export default {
   name: 'Cart',
   components: {
-      BagIcon,
-      WishlistIcon
+    BagIcon,
+    WishlistIcon
   },
   mixins: [mixin],
   props: {
-      items: {
-          type: Array,
-          default () {
-              return []
-          },
-      },
-      title: {
-          type: String,
-          default: ''
-      },
-      showTotal: {
-          type: Boolean,
-          default: true
+    items: {
+      type: Array,
+      default () {
+        return []
       }
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    showTotal: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     remove (item) {
-        this.$emit('removeItem', item)
+      this.$emit('removeItem', item)
     },
     moveToCart (item) {
-        this.$emit('moveToCart', item)
+      this.$emit('moveToCart', item)
     },
     moveToWishlist (item) {
-        this.$emit('moveToWishlist', item)
+      this.$emit('moveToWishlist', item)
     },
     isItemInCart (item) {
       return !!this.itemsInCart.find(itemInCart => itemInCart.uuid === item.uuid)

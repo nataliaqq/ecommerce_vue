@@ -39,24 +39,24 @@
 
 <script>
 
-import BagIcon from '../assets/svg/bag';
-import Cart from './Cart';
-import WishlistIcon from '../assets/svg/wishlist';
-import mixin from '../mixins';
-import { mapMutations } from 'vuex';
+import BagIcon from '../assets/svg/bag'
+import Cart from './Cart'
+import WishlistIcon from '../assets/svg/wishlist'
+import mixin from '../mixins'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Header',
   components: {
-      BagIcon,
-      Cart,
-      WishlistIcon
+    BagIcon,
+    Cart,
+    WishlistIcon
   },
   mixins: [mixin],
   data () {
     return {
-        cartHover: false,
-        wishlistHover: false
+      cartHover: false,
+      wishlistHover: false
     }
   },
   methods: {
@@ -73,12 +73,12 @@ export default {
       this.wishlistHover = hover
     },
     moveToWishlist (item) {
-        this.addToWishlist(item)
-        this.removeFromCart(item)
+      this.addToWishlist(item)
+      this.removeFromCart(item)
     },
     moveToCart (item) {
-        this.addToCart(item)
-        this.removeFromWishlist(item)
+      this.addToCart(item)
+      this.removeFromWishlist(item)
     }
   }
 }
