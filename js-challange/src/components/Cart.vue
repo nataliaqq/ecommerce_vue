@@ -9,9 +9,12 @@
                 <div class="trunc-3">{{ item.title }}</div>
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
+            
             <div @click="remove(item)" class="remove-btn"></div>
-            <div v-if="!isItemInCart(item)" @click="moveToCart(item)">Move to cart</div>
-            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)">Move to wishlist</div>
+            
+            <div v-if="!isItemInCart(item)" @click="moveToCart(item)" class="move-to-btn"><BagIcon color="white" /></div>
+            <div v-if="!isItemInWishlist(item)" @click="moveToWishlist(item)" class="move-to-btn">Move to wishlist</div>
+            
         </div>
 
         <div class="total" v-if="showTotal">
@@ -23,6 +26,7 @@
 
 <script>
 import mixin from '../mixins';
+import BagIcon from '../assets/svg/bag';
 
 export default {
   name: 'Cart',
@@ -34,6 +38,9 @@ export default {
           type: Boolean,
           default: true
       }
+  },
+  components: {
+      BagIcon
   },
   methods: {
     remove (item) {

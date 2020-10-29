@@ -7,7 +7,7 @@
                     <div class="header-bag__price">
                         {{ totalPrice | money }}
                     </div>
-                    <img :src="bagIcon">
+                    <BagIcon />
                     <span class="bag__item-counter">{{ itemsInCart.length }}</span>
                 </div>
                 <Cart
@@ -39,7 +39,7 @@
 
 <script>
 
-import Bag from '../assets/svg/bag.svg';
+import BagIcon from '../assets/svg/bag';
 import Cart from './Cart';
 import WishlistIcon from '../assets/svg/wishlist';
 import mixin from '../mixins';
@@ -50,13 +50,12 @@ export default {
   mixins: [mixin],
   data () {
     return {
-        bagIcon: Bag,
-
         cartHover: false,
         wishlistHover: false
     }
   },
   components: {
+      BagIcon,
       Cart,
       WishlistIcon
   },
