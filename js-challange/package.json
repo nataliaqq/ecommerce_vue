@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -14,19 +15,26 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^4.5.8",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-standard": "^5.1.2",
+    "@vue/test-utils": "^1.1.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.1",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
+    "jest": "^26.6.1",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.4",
+    "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -48,5 +56,25 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest",
+      ".*\\.(js)$": "babel-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    }
+  }
 }
