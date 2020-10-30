@@ -45,18 +45,25 @@ export default {
   },
   methods: {
     loadPage (page) {
-      this.data = []
+      this.resetData()
+
       const offset = (page - 1) * this.itemsPerPage
-      restService.getStore({ limit: this.itemsPerPage, offset: offset }).then(res => {
+      this.callData({ limit: this.itemsPerPage, offset: offset })
+    },
+    callData (params) {
+      restService.getStore({ limit: params?.limit, offset: params?.offset })
+      
+      .then(res => {
         this.data = res?.data || []
       })
+    },
+    resetData () {
+      this.data = []
     }
   },
 
   mounted () {
-    restService.getStore().then(res => {
-      this.data = res?.data || []
-    })
+    this.callData()
   }
 }
 </script>
