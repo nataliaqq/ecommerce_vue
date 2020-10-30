@@ -49,7 +49,15 @@ describe('ItemCard', () => {
   })
 
   it('removes item from cart by button click', () => {
-    itemCard.vm.itemsInCart = [expectedItem]
+    itemCard = shallowMount(ItemCard, {
+      propsData: props,
+      computed: {
+        itemsInCart: () => [expectedItem],
+        itemsInWishlist: () => []
+      },
+      store,
+      localVue
+    })
 
     itemCard.vm.$nextTick().then(() => {
       itemCard.find('.product__add-to-cart').trigger('click')
@@ -63,7 +71,15 @@ describe('ItemCard', () => {
   })
 
   it('removes item from cart by button click', () => {
-    itemCard.vm.itemsInWishlist = [expectedItem]
+    itemCard = shallowMount(ItemCard, {
+      propsData: props,
+      computed: {
+        itemsInCart: () => [],
+        itemsInWishlist: () => [expectedItem]
+      },
+      store,
+      localVue
+    })
 
     itemCard.vm.$nextTick().then(() => {
       itemCard.find('.product__wishlist-button').trigger('click')
