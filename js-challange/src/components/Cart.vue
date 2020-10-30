@@ -1,6 +1,9 @@
 <template>
     <div class="cart" v-if="items.length">
-        <div class="title">{{ title }}</div>
+        <div class="title">
+            <span v-if="type === 'cart'">Your cart"</span>
+            <span v-if="type === 'wishlist'">Your wishlit"</span>
+        </div>
         <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
             <div class="product-in-cart__image-container">
                 <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=200`" :alt="item.title" itemprop="image"/>
@@ -46,9 +49,9 @@ export default {
         return []
       }
     },
-    title: {
+    type: {
       type: String,
-      default: ''
+      default: 'cart'
     },
     showTotal: {
       type: Boolean,
@@ -63,7 +66,8 @@ export default {
       'removeFromWishlist'
     ]),
     remove (item) {
-      this.$emit('removeItem', item)
+      if (this.type === 'cart') this.removeFromCart()
+      if (this.type === 'wishlist') this.removeFromWishlist()
     },
     moveToWishlist (item) {
       this.addToWishlist(item)

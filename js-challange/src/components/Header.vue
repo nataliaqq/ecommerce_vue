@@ -13,8 +13,6 @@
                 <Cart
                     v-show="cartHover"
                     :items="$store.state.itemsInCart"
-                    @removeItem="removeFromCart"
-                    title="Your cart"
                 />
             </div>
             <div class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
@@ -27,7 +25,7 @@
                     :items="$store.state.itemsInWishlist"
                     :showTotal="false"
                     @removeItem="removeFromWishlist"
-                    title="In your wishlist"
+                    type="isWishlist"
                 />
             </div>
         </aside>
@@ -35,8 +33,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 import Cart from './Cart'
 import BagIcon from '../assets/svg/bag'
 import WishlistIcon from '../assets/svg/wishlist'
@@ -57,10 +53,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
-      'removeFromCart',
-      'removeFromWishlist'
-    ]),
     setCartHover (hover) {
       this.cartHover = hover
     },
