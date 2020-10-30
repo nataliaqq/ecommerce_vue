@@ -9,7 +9,7 @@
                 <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=200`" :alt="item.title" itemprop="image"/>
             </div>
             <div>
-                <div class="trunc-3">{{ item.title }}</div>
+                <div class="product-in-cart__title trunc-3">{{ item.title }}</div>
                 <div class="price">{{ item.retail_price.formatted_value }}</div>
             </div>
 
