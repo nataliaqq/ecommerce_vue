@@ -1,6 +1,6 @@
+import Vuex from 'vuex'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import ItemCard from '../../components/ItemCard'
-import Vuex from 'vuex'
 import { expectedItem } from './expectedData'
 
 const localVue = createLocalVue()
