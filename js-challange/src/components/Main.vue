@@ -3,7 +3,7 @@
     <Header />
     <main class="product-page">
       <div class="container">
-        <ul class="product-list" v-if="data">
+        <ul class="product-list" v-if="data && data.length">
           <ItemCard
             :item="item"
             v-for="item in data"
