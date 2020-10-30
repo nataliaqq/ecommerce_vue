@@ -5,28 +5,19 @@ import Vuex from 'vuex'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-
-describe('Mounted App', () => {
-    let actions
+describe('App', () => {
     let store
 
     beforeEach(() => {
-        actions = {
-          openConfirmationModelAction: jest.fn(),
-          sendUserDateViaEmail: jest.fn()
-        }
-        store = new Vuex.Store({
-          actions
-        })
+        store = new Vuex.Store()
       })
     
     it('renders without errors', () => {
-        const msg = 6
         const wrapper = shallowMount(App, {
           store,
           localVue
         })
-        expect(wrapper.isVueInstance()).toBeTruthy()
+        expect(wrapper.vm).toBeTruthy()
       })
   })
   
