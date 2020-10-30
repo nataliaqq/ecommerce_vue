@@ -50,18 +50,21 @@ describe('Pagination', () => {
       ]);
   });
 
-  // it('change the current page if a left arrow is clicked', () => {
-  //     pagination = mount(Pagination, {
-  //         propsData: props,
-  //         data () {
-  //           return data
-  //         }
-  //     });
+  it('change the current page if a left arrow is clicked', () => {
+      pagination.find('#arrow-left').trigger('click')
 
-  //     pagination.find('#arrow-left').trigger('click');
+      pagination.vm.$nextTick().then(() => {
+        expect(pagination.emitted()['loadPage']).toBeTruthy()
+        expect(pagination.vm.currentPage).toBe(2)
+      })
 
-  //     expect(pagination.vm.currentPage).toBe(2)
-  // });
+      pagination.find('#arrow-right').trigger('click')
+
+      pagination.vm.$nextTick().then(() => {
+        expect(pagination.emitted()['loadPage']).toBeTruthy()
+        expect(pagination.vm.currentPage).toBe(4)
+      })
+  });
 
   it('set the default last page if it was not provided', () => {
     pagination = shallowMount(Pagination, {
