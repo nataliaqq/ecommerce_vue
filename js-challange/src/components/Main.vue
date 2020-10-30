@@ -10,7 +10,7 @@
             :key="item.uuid" />
         </ul>
         <Loader v-if="!data || !data.length" />
-        <Pagination @loadPage="loadPage"/>
+        <Pagination @loadPage="loadPage" :firstPage="firstPage" :lastPage="lastPage" :delta="1" />
       </div>
     </main>
     <Footer />
@@ -24,7 +24,7 @@ import Footer from './Footer'
 import Loader from './Loader'
 import Pagination from './Pagination'
 import restService from '../api/service'
-import { itemsPerPage } from '../constants'
+import { itemsPerPage, firstPage, lastPage, delta } from '../constants'
 
 export default {
   name: 'Main',
@@ -40,7 +40,11 @@ export default {
       data: [],
 
       cartHover: false,
-      wishlistHover: false
+      wishlistHover: false,
+
+      lastPage: lastPage,
+      firstPage: firstPage,
+      delta: delta
     }
   },
   methods: {
@@ -63,7 +67,7 @@ export default {
   },
 
   mounted () {
-    this.callData()
+    this.callData({ limit: itemsPerPage })
   }
 }
 </script>

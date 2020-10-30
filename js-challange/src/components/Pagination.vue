@@ -24,33 +24,43 @@
 <script>
 import ArrowLeft from '../assets/svg/arrow-left.svg'
 import ArrowRight from '../assets/svg/arrow-right.svg'
-import { firstPage, lastPage, delta } from '../constants'
 
 export default {
   name: 'Pagination',
+  props: {
+      lastPage: {
+          type: Number,
+          default: 10
+      },
+      delta: {
+          type: Number,
+          default: 2
+      }
+  },
   data () {
     return {
       arrowLeft: ArrowLeft,
       arrowRight: ArrowRight,
-      currentPage: 1
+      currentPage: 1,
+      firstPage: 1
     }
   },
   computed: {
     // dot pagination. Source: https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
     left () {
-      return this.currentPage - delta
+      return this.currentPage - this.delta
     },
     right () {
-      return this.currentPage + delta + 1
+      return this.currentPage + this.delta + 1
     },
     pagesArray () {
         // create array 
-        return Array.from({length: lastPage}, (_, i) => i + 1)
+        return Array.from({length: this.lastPage}, (_, i) => i + 1)
          // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     dottedPages () {
         // filters for page numbers
-        const isLastOrFirstPage = (i) => i === firstPage || i === lastPage
+        const isLastOrFirstPage = (i) => i === this.firstPage || i === this.lastPage
         const isInCenter = (i) => i >= this.left && i < this.right
 
         // replace pages to hide with dots
