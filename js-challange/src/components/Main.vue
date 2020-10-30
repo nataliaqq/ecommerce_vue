@@ -24,6 +24,7 @@ import Footer from './Footer'
 import Loader from './Loader'
 import Pagination from './Pagination'
 import restService from '../api/service'
+import { itemsPerPage } from '../constants'
 
 export default {
   name: 'Main',
@@ -37,7 +38,6 @@ export default {
   data () {
     return {
       data: [],
-      itemsPerPage: 6,
 
       cartHover: false,
       wishlistHover: false
@@ -47,8 +47,8 @@ export default {
     loadPage (page) {
       this.resetData()
 
-      const offset = (page - 1) * this.itemsPerPage
-      this.callData({ limit: this.itemsPerPage, offset: offset })
+      const offset = (page - 1) * itemsPerPage
+      this.callData({ limit: itemsPerPage, offset: offset })
     },
     callData (params) {
       restService.getStore({ limit: params?.limit, offset: params?.offset })

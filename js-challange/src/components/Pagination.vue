@@ -24,6 +24,7 @@
 <script>
 import ArrowLeft from '../assets/svg/arrow-left.svg'
 import ArrowRight from '../assets/svg/arrow-right.svg'
+import { firstPage, lastPage, delta } from '../constants'
 
 export default {
   name: 'Pagination',
@@ -31,25 +32,22 @@ export default {
     return {
       arrowLeft: ArrowLeft,
       arrowRight: ArrowRight,
-      currentPage: 1,
-      lastPage: 10,
-      firstPage: 1,
-      delta: 1
+      currentPage: 1
     }
   },
   computed: {
     // dot pagination. Source: https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
     left () {
-      return this.currentPage - this.delta
+      return this.currentPage - delta
     },
     right () {
-      return this.currentPage + this.delta + 1
+      return this.currentPage + delta + 1
     },
     range () {
       const range = []
 
-      for (let i = 1; i <= this.lastPage; i++) {
-        const isLastOrFirstPage = i === 1 || i === this.lastPage
+      for (let i = 1; i <= lastPage; i++) {
+        const isLastOrFirstPage = i === firstPage || i === lastPage
         const isInCenter = i >= this.left && i < this.right
 
         if (isLastOrFirstPage || isInCenter) {
