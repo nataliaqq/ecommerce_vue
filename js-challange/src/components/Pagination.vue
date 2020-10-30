@@ -6,7 +6,7 @@
                     <img :src="arrowLeft">
                 </a>
             </li>
-            <li class="pagination__item" :class="currentPage == page ? 'active' : null" v-for="(page, index) in pageArray" :key="`${page}-${index}`">
+            <li class="pagination__item" :class="currentPage == page ? 'active' : null" v-for="(page, index) in paginationArray" :key="`${page}-${index}`">
                 <a v-if="!isNaN(page)" href="#" class="pagination__link" @click="goToPage(page)">
                     {{ page }}
                 </a>
@@ -43,35 +43,26 @@ export default {
     right () {
       return this.currentPage + delta + 1
     },
-    range () {
-      const range = []
-
-      for (let i = 1; i <= lastPage; i++) {
-        const isLastOrFirstPage = i === firstPage || i === lastPage
-        const isInCenter = i >= this.left && i < this.right
-
-        if (isLastOrFirstPage || isInCenter) {
-          range.push(i)
-        }
-      }
-      return range
+    pagesArray () {
+        // create array 
+        return Array.from({length: lastPage}, (_, i) => i + 1)
+         // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
-    pageArray () {
-      const rangeWithDots = []
-      let l
+    dottedPages () {
+        // filters for page numbers
+        const isLastOrFirstPage = (i) => i === firstPage || i === lastPage
+        const isInCenter = (i) => i >= this.left && i < this.right
 
-      for (const i of this.range) {
-        if (l) {
-          if (i - l === 2) {
-            rangeWithDots.push(l + 1)
-          } else if (i - l !== 1) {
-            rangeWithDots.push('...')
-          }
-        }
-        rangeWithDots.push(i)
-        l = i
-      }
-      return rangeWithDots
+        // replace pages to hide with dots
+        return this.pagesArray
+            .map(pageNum => isLastOrFirstPage(pageNum) || isInCenter(pageNum) ? pageNum : '...')
+        // => [1, 2, ..., ..., ..., ..., ..., ..., ..., 10]
+    },
+    paginationArray () {
+        // remove double dots
+        return this.dottedPages
+            .filter((pageNumOrDots, index) => pageNumOrDots !== this.dottedPages[index-1])
+        // =>  [1, 2  ..., 10]
     }
   },
   methods: {
