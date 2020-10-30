@@ -6,7 +6,7 @@
                     <img :src="arrowLeft">
                 </a>
             </li>
-            <li class="pagination__item" :class="currentPage == page ? 'active' : null" v-for="page in pageArray" :key="page">
+            <li class="pagination__item" :class="currentPage == page ? 'active' : null" v-for="(page, index) in pageArray" :key="`${page}-${index}`">
                 <a v-if="!isNaN(page)" href="#" class="pagination__link" @click="goToPage(page)">
                     {{ page }}
                 </a>
