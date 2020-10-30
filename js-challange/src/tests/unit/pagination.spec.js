@@ -1,9 +1,5 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Pagination from '../../components/Pagination.vue'
-import Vuex from 'vuex'
-
-const localVue = createLocalVue()
-localVue.use(Vuex)
 
 describe('Pagination', () => {
   let pagination
