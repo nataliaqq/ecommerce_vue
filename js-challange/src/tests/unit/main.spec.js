@@ -5,27 +5,26 @@ import Vuex from 'vuex'
 import { expectedData } from './expectedData'
 
 const localVue = createLocalVue()
-localVue.use(Vuex)
 
 describe('Main', () => {
-    it('renders without errors', () => {
-      const wrapper = shallowMount(Main, {
-        localVue
-      })
-      expect(wrapper.vm).toBeTruthy()
+  let main
+  beforeEach(() => {
+    main = shallowMount(Main, {
+      data () {
+        return {
+          data: expectedData
+        }
+      },
+      localVue
     })
+  })
+  
+  it('renders without errors', () => {
+    expect(main.vm).toBeTruthy()
+  })
 
-    it('load data', () => {
-      const wrapper = shallowMount(Main, {
-        data () {
-          return {
-            data: expectedData
-          }
-        },
-        localVue
-      })
-
-      expect(wrapper.html()).toContain('<ul class="product-list">')
-    })
+  it('load data', () => {
+    expect(main.html()).toContain('<ul class="product-list">')
+  })
 })
   

@@ -7,17 +7,18 @@ localVue.use(Vuex)
 
 describe('App', () => {
     let store
+    let app
 
     beforeEach(() => {
-        store = new Vuex.Store()
+      store = new Vuex.Store()
+      app = shallowMount(App, {
+        store,
+        localVue
       })
+    })
     
     it('renders without errors', () => {
-        const wrapper = shallowMount(App, {
-          store,
-          localVue
-        })
-        expect(wrapper.vm).toBeTruthy()
-      })
+      expect(app.vm).toBeTruthy()
+    })
   })
   

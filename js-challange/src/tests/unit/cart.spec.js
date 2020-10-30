@@ -3,38 +3,30 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Cart from '../../components/Cart'
 import { expectedItem } from './expectedData'
 
+import { __createMocks as createStoreMocks } from '../../store'
+
+jest.mock('../../store');
+
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
 describe('Cart', () => {
   let cart
   let props
-  let store
-  let mutations
+  let storeMocks
 
   beforeEach(() => {
-      props = {
-        type: 'cart',
-      }
-
-      mutations = {
-        addToCart: jest.fn(),
-        removeFromCart: jest.fn(),
-        addToWishlist: jest.fn(),
-        removeFromWishlist: jest.fn(),
-      }
-
-      store = new Vuex.Store({
-        mutations
-      })
+      storeMocks = createStoreMocks();
 
       cart = shallowMount(Cart, {
-        propsData: props,
+        propsData: {
+            type: 'cart'
+        },
         computed: {
           itemsInCart: () => [expectedItem],
           itemsInWishlist: () => []
         },
-        store,
+        store: storeMocks.store,
         localVue
       })
   });
@@ -45,7 +37,7 @@ describe('Cart', () => {
 
   it('product can be removed from cart correctly', () => {
     cart.find('.remove-button').trigger('click')
-    expect(mutations.removeFromCart).toBeCalled() 
+    expect(storeMocks.mutations.removeFromCart).toBeCalled() 
   })
   it('product can be moved to wishlist correctly', () => {
     cart.find('.move-to-button').trigger('click')
@@ -60,7 +52,7 @@ describe('Cart', () => {
           itemsInCart: () => [expectedItem],
           itemsInWishlist: () => [expectedItem]
         },
-        store,
+        store: storeMocks,
         localVue
       })
     expect(cart.contains('.move-to-button')).toBe(false)
