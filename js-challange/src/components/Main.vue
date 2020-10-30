@@ -55,9 +55,7 @@ export default {
       this.callData({ limit: itemsPerPage, offset: offset })
     },
     callData (params) {
-      restService.getStore({ limit: params?.limit, offset: params?.offset })
-      
-      .then(res => {
+      restService.getStore({ limit: params?.limit, offset: params?.offset }).then(res => {
         this.data = res?.data || []
       })
     },

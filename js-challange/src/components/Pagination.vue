@@ -28,20 +28,20 @@ import ArrowRight from '../assets/svg/arrow-right.svg'
 export default {
   name: 'Pagination',
   props: {
-      lastPage: {
-          type: Number,
-          default: 10,
-          validator (value) {
-              return value > 0
-          }
-      },
-      delta: {
-          type: Number,
-          default: 2,
-          validator (value) {
-              return value > 0
-          }
+    lastPage: {
+      type: Number,
+      default: 10,
+      validator (value) {
+        return value > 0
       }
+    },
+    delta: {
+      type: Number,
+      default: 2,
+      validator (value) {
+        return value > 0
+      }
+    }
   },
   data () {
     return {
@@ -60,25 +60,25 @@ export default {
       return this.currentPage + this.delta + 1
     },
     pagesArray () {
-        // create array 
-        return Array.from({length: this.lastPage}, (_, i) => i + 1)
-         // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      // create array
+      return Array.from({ length: this.lastPage }, (_, i) => i + 1)
+      // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     dottedPages () {
-        // filters for page numbers
-        const isLastOrFirstPage = (i) => i === this.firstPage || i === this.lastPage
-        const isInCenter = (i) => i >= this.left && i < this.right
+      // filters for page numbers
+      const isLastOrFirstPage = (i) => i === this.firstPage || i === this.lastPage
+      const isInCenter = (i) => i >= this.left && i < this.right
 
-        // replace pages to hide with dots
-        return this.pagesArray
-            .map(pageNum => isLastOrFirstPage(pageNum) || isInCenter(pageNum) ? pageNum : '...')
-        // => [1, 2, ..., ..., ..., ..., ..., ..., ..., 10]
+      // replace pages to hide with dots
+      return this.pagesArray
+        .map(pageNum => isLastOrFirstPage(pageNum) || isInCenter(pageNum) ? pageNum : '...')
+      // => [1, 2, ..., ..., ..., ..., ..., ..., ..., 10]
     },
     paginationArray () {
-        // remove double dots
-        return this.dottedPages
-            .filter((pageNumOrDots, index) => pageNumOrDots !== this.dottedPages[index-1])
-        // =>  [1, 2  ..., 10]
+      // remove double dots
+      return this.dottedPages
+        .filter((pageNumOrDots, index) => pageNumOrDots !== this.dottedPages[index - 1])
+      // =>  [1, 2  ..., 10]
     }
   },
   methods: {
