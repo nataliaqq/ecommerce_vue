@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Pagination from '../../components/Pagination.vue'
 import Vuex from 'vuex'
 
@@ -50,7 +50,7 @@ describe('Pagination', () => {
       ]);
   });
 
-  it('change the current page if a left arrow is clicked', () => {
+  it('change the current page if a left/right arrow is clicked', () => {
       pagination.find('#arrow-left').trigger('click')
 
       pagination.vm.$nextTick().then(() => {
@@ -64,6 +64,15 @@ describe('Pagination', () => {
         expect(pagination.emitted()['loadPage']).toBeTruthy()
         expect(pagination.vm.currentPage).toBe(4)
       })
+  });
+
+  it('change the current page if a page number is clicked', () => { 
+    pagination.findAll('.pagination__item').at(1).trigger('click')
+
+    pagination.vm.$nextTick().then(() => {
+      expect(pagination.emitted()['loadPage']).toBeTruthy()
+      expect(pagination.vm.currentPage).toBe(1)
+    })
   });
 
   it('set the default last page if it was not provided', () => {
