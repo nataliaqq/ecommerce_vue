@@ -24,11 +24,12 @@
 
 <script>
 import { mapMutations } from 'vuex'
-
+import mixin from '../mixins'
 import WishlistIcon from '../assets/svg/wishlist'
 
 export default {
   name: 'ItemCard',
+  mixins: [mixin],
   components: {
     WishlistIcon
   },
@@ -38,14 +39,6 @@ export default {
       default () {
         return {}
       }
-    }
-  },
-  computed: {
-    itemsInCart () {
-      return this.$store.state.itemsInCart
-    },
-    itemsInWishlist () {
-      return this.$store.state.itemsInWishlist
     }
   },
   methods: {
