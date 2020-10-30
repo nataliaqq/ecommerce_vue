@@ -1,8 +1,8 @@
 <template>
     <div class="cart" v-if="items.length">
         <div class="title">
-            <span v-if="type === 'cart'">Your cart"</span>
-            <span v-if="type === 'wishlist'">Your wishlit"</span>
+            <span v-if="type === 'cart'">Your cart</span>
+            <span v-if="type === 'wishlist'">Your wishlit</span>
         </div>
         <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
             <div class="product-in-cart__image-container">
