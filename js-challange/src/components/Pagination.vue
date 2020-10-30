@@ -86,8 +86,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.pagination__list {
+    max-width: 400px;
+    width: 100%;
+    justify-content: space-around;
+}
 .pagination__item {
     font-size: 16px;
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 }
 .pagination__item {
     &.active {
