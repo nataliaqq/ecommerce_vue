@@ -1,5 +1,5 @@
 <template>
-    <div class="cart" v-if="items.length">
+    <div class="cart" v-if="items && items.length">
         <div class="title">
             <span v-if="type === 'cart'">Your cart</span>
             <span v-if="type === 'wishlist'">Your wishlit</span>
@@ -20,7 +20,7 @@
 
         </div>
 
-        <div class="total" v-if="showTotal">
+        <div class="total" v-if="type === 'cart'">
             <div>Total:</div>
             <div class="total-amount">{{ totalPrice | money }}</div>
         </div>
@@ -37,25 +37,20 @@ import WishlistIcon from '../assets/svg/wishlist'
 
 export default {
   name: 'Cart',
+  mixins: [mixin],
   components: {
     BagIcon,
     WishlistIcon
   },
-  mixins: [mixin],
   props: {
-    items: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
     type: {
       type: String,
       default: 'cart'
-    },
-    showTotal: {
-      type: Boolean,
-      default: true
+    }
+  },
+  computed: {
+    items () {
+      return this.type === 'wishlist' ? this.itemsInWishlist : this.itemsInCart
     }
   },
   methods: {
@@ -66,8 +61,8 @@ export default {
       'removeFromWishlist'
     ]),
     remove (item) {
-      if (this.type === 'cart') this.removeFromCart()
-      if (this.type === 'wishlist') this.removeFromWishlist()
+      if (this.type === 'cart') this.removeFromCart(item)
+      if (this.type === 'wishlist') this.removeFromWishlist(item)
     },
     moveToWishlist (item) {
       this.addToWishlist(item)

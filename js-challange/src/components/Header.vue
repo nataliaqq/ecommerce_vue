@@ -12,7 +12,6 @@
                 </div>
                 <Cart
                     v-show="cartHover"
-                    :items="$store.state.itemsInCart"
                 />
             </div>
             <div class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
@@ -22,10 +21,7 @@
                 </div>
                  <Cart
                     v-show="wishlistHover"
-                    :items="$store.state.itemsInWishlist"
-                    :showTotal="false"
-                    @removeItem="removeFromWishlist"
-                    type="isWishlist"
+                    type="wishlist"
                 />
             </div>
         </aside>
