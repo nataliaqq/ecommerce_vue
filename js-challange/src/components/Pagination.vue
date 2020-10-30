@@ -30,11 +30,17 @@ export default {
   props: {
       lastPage: {
           type: Number,
-          default: 10
+          default: 10,
+          validator (value) {
+              return value > 0
+          }
       },
       delta: {
           type: Number,
-          default: 2
+          default: 2,
+          validator (value) {
+              return value > 0
+          }
       }
   },
   data () {
