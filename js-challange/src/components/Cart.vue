@@ -25,7 +25,10 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import mixin from '../mixins'
+
 import BagIcon from '../assets/svg/bag'
 import WishlistIcon from '../assets/svg/wishlist'
 
@@ -53,14 +56,22 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'addToCart',
+      'addToWishlist',
+      'removeFromCart',
+      'removeFromWishlist'
+    ]),
     remove (item) {
       this.$emit('removeItem', item)
     },
-    moveToCart (item) {
-      this.$emit('moveToCart', item)
-    },
     moveToWishlist (item) {
-      this.$emit('moveToWishlist', item)
+      this.addToWishlist(item)
+      this.removeFromCart(item)
+    },
+    moveToCart (item) {
+      this.addToCart(item)
+      this.removeFromWishlist(item)
     },
     isItemInCart (item) {
       return !!this.itemsInCart.find(itemInCart => itemInCart.uuid === item.uuid)
