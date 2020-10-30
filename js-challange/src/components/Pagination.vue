@@ -1,7 +1,7 @@
 <template>
     <nav class="pagination">
         <ul class="pagination__list">
-            <li class="pagination__item">
+            <li class="pagination__item" id="arrow-left">
                 <a href="#" class="pagination__link" @click="prevPage">
                     <img :src="arrowLeft">
                 </a>
@@ -12,7 +12,7 @@
                 </a>
                 <span v-if="isNaN(page)">{{ page }}</span>
             </li>
-            <li class="pagination__item">
+            <li class="pagination__item" id="arrow-right">
                 <a href="#" class="pagination__link" @click="nextPage">
                     <img :src="arrowRight">
                 </a>
@@ -84,13 +84,11 @@ export default {
   methods: {
     nextPage () {
       if (this.currentPage >= this.lastPage) return
-      this.currentPage++
-      this.$emit('loadPage', this.currentPage)
+      this.goToPage(this.currentPage + 1)
     },
     prevPage () {
       if (this.currentPage <= this.firstPage) return
-      this.currentPage--
-      this.$emit('loadPage', this.currentPage)
+      this.goToPage(this.currentPage - 1)
     },
     goToPage (newPage) {
       this.currentPage = newPage
