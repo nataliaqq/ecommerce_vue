@@ -61,7 +61,10 @@ export default {
        */
     type: {
       type: String,
-      default: 'cart'
+      default: 'cart',
+      validator (value) {
+        return value === 'cart' || value === 'wishlist'
+      }
     }
   },
   computed: {
