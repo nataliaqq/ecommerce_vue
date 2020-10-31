@@ -5,7 +5,7 @@ import { expectedItem } from './expectedData'
 
 import { __createMocks as createStoreMocks } from '../../store'
 
-jest.mock('../../store');
+jest.mock('../../store')
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -13,11 +13,11 @@ localVue.use(Vuex)
 describe('ItemCard', () => {
   let itemCard
 
-  const storeMocks = createStoreMocks();
+  const storeMocks = createStoreMocks()
 
   const options = {
     propsData: {
-      item: expectedItem,
+      item: expectedItem
     },
     computed: {
       itemsInCart: () => [],
@@ -29,7 +29,7 @@ describe('ItemCard', () => {
 
   beforeEach(() => {
     itemCard = shallowMount(ItemCard, options)
-  });
+  })
 
   it('product renders correctly', () => {
     expect(itemCard.find('.product__title').text()).toEqual(itemCard.props().item.title)
@@ -40,7 +40,7 @@ describe('ItemCard', () => {
     expect(storeMocks.mutations.addToCart).toBeCalled()
     expect(storeMocks.mutations.removeFromCart).not.toBeCalled()
   })
-  
+
   it('adds item to wishlist by button click', () => {
     itemCard.find('.product__wishlist-button').trigger('click')
     expect(storeMocks.mutations.addToWishlist).toBeCalled()
@@ -81,4 +81,3 @@ describe('ItemCard', () => {
     })
   })
 })
-  

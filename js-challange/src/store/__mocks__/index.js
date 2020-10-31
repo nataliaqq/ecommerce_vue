@@ -4,19 +4,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export const mutations = {
-    addToCart: jest.fn(),
-    removeFromCart: jest.fn(),
-    addToWishlist: jest.fn(),
-    removeFromWishlist: jest.fn(),
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+  addToWishlist: jest.fn(),
+  removeFromWishlist: jest.fn()
 }
 
 export const state = {
-    itemsInCart: [],
-    itemsInWishlist: []
+  itemsInCart: [],
+  itemsInWishlist: []
 }
 
 // eslint-disable-next-line no-underscore-dangle
-export function __createMocks(custom = { getters: {}, mutations: {}, actions: {}, state: {} }) {
+export function __createMocks (custom = { getters: {}, mutations: {}, actions: {}, state: {} }) {
   const mockMutations = Object.assign({}, mutations, custom.mutations)
   const mockState = Object.assign({}, state, custom.state)
 

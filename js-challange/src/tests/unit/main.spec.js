@@ -18,7 +18,7 @@ describe('Main', () => {
       localVue
     })
   })
-  
+
   it('renders without errors', () => {
     expect(main.vm).toBeTruthy()
   })
@@ -27,4 +27,3 @@ describe('Main', () => {
     expect(main.html()).toContain('<ul class="product-list">')
   })
 })
-  

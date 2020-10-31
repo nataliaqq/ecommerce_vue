@@ -5,7 +5,7 @@ import { expectedItem } from './expectedData'
 
 import { __createMocks as createStoreMocks } from '../../store'
 
-jest.mock('../../store');
+jest.mock('../../store')
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -17,7 +17,7 @@ describe('Cart', () => {
 
   const options = {
     propsData: {
-        type: 'cart'
+      type: 'cart'
     },
     computed: {
       itemsInCart: () => [expectedItem],
@@ -28,7 +28,7 @@ describe('Cart', () => {
   }
 
   beforeEach(() => {
-      cart = shallowMount(Cart, options)
+    cart = shallowMount(Cart, options)
   })
 
   it('product in cart renders correctly', () => {
@@ -37,8 +37,8 @@ describe('Cart', () => {
 
   it('product can be removed from cart correctly', () => {
     cart.find('.remove-button').trigger('click')
-    expect(storeMocks.mutations.removeFromCart).toBeCalled() 
-    expect(storeMocks.mutations.addToCart).not.toBeCalled() 
+    expect(storeMocks.mutations.removeFromCart).toBeCalled()
+    expect(storeMocks.mutations.addToCart).not.toBeCalled()
   })
 
   it('product can be moved to wishlist correctly', () => {
@@ -50,26 +50,25 @@ describe('Cart', () => {
   })
   it('if product is already in wishlist there is no move button', () => {
     cart = shallowMount(Cart, {
-        ...options,
-        computed: {
-            itemsInCart: () => [expectedItem],
-            itemsInWishlist: () => [expectedItem]
-        }
+      ...options,
+      computed: {
+        itemsInCart: () => [expectedItem],
+        itemsInWishlist: () => [expectedItem]
+      }
     })
     expect(cart.find('.move-to-button').exists()).toBeFalsy()
   })
   it('show right total sum', () => {
     cart = shallowMount(Cart, {
-        ...options,
-        computed: {
-            itemsInCart: () => [expectedItem, expectedItem, expectedItem],
-            itemsInWishlist: () => []
-        }
+      ...options,
+      computed: {
+        itemsInCart: () => [expectedItem, expectedItem, expectedItem],
+        itemsInWishlist: () => []
+      }
     })
     const sum = cart.find('.total-amount').text()
     const expectedSum = cart.vm.items.reduce((prev, cur) => prev + cur.retail_price.value, 0)
     const expectedSumFormatted = '€ ' + expectedSum.toFixed(2)
     expect(sum).toEqual(expectedSumFormatted)
   })
-});
-  
+})
