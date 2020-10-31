@@ -33,8 +33,18 @@ describe('Header', () => {
   })
 
   it('changes cartHover data when hover bag', () => {
-    // header.find('#header-item-bag').simulate('mouseover')
-    expect(header.vm.cartHover).toBe(false)
+    header.find('#header-item-bag').trigger('click')
+    header.vm.$nextTick().then(() => {
+        expect(header.vm.cartHover).toBe(true)
+    }).catch(() => {
+    })
   })
-});
+  it('changes cartHover data when hover bag', () => {
+    header.find('#header-item-wishlist').trigger('click')
+    header.vm.$nextTick().then(() => {
+        expect(header.vm.wishlistHover).toBe(true)
+    }).catch(() => {
+    })
+  })
+})
   

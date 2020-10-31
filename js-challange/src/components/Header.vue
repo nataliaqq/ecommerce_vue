@@ -2,7 +2,7 @@
     <header class="header container">
         <h1 class="page-title">BRAND</h1>
         <aside class="header-bag">
-            <div class="header-item-wrapper" @mouseover="setCartHover(true)" @mouseleave="setCartHover(false)">
+            <div id="header-item-bag" class="header-item-wrapper" @mouseover="setCartHover(true)" @mouseleave="setCartHover(false)">
                 <div class="header-bag__item header-bag__count">
                     <div class="header-bag__price">
                         {{ totalPrice | money }}
@@ -14,7 +14,7 @@
                     v-show="cartHover"
                 />
             </div>
-            <div class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
+            <div id="header-item-wishlist" class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
                 <div class="header-bag__item header-bag__wishlist-count">
                     <WishlistIcon />
                     <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
