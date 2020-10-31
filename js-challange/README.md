@@ -1,4 +1,4 @@
-# js-challange
+# js-challenge
 
 ## Project setup
 ```
@@ -18,6 +18,11 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Run your tests
+```
+npm test
 ```
 
 ### Customize configuration
