@@ -133,6 +133,7 @@ export default {
     align-items: center;
     padding: 15px 50px 15px 20px;
     position: relative;
+    min-height: 90px;
     &:nth-child(2n) {
         background-color: #ececec;
     }

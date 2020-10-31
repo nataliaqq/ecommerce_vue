@@ -71,6 +71,10 @@ header {
     padding: 0 40px;
     margin: 0 auto;
 }
+.header {
+    height: 100%;
+    align-items: center;
+}
 aside {
     height: 100%;
     align-items: center;
