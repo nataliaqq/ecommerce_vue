@@ -24,7 +24,7 @@ import Footer from './Footer'
 import Loader from './Loader'
 import Pagination from './Pagination'
 import restService from '../api/service'
-import { itemsPerPage, firstPage, lastPage, paginationDelta } from '../constants'
+import { itemsPerPage, lastPage, paginationDelta } from '../constants'
 
 export default {
   name: 'Main',
