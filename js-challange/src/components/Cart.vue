@@ -28,6 +28,17 @@
 </template>
 
 <script>
+/**
+ * Products cart/wishlist component
+ * Show list of products
+ * Cart and wishlist are represented with one component
+ * since both of them have same functionality
+ *
+ * In wishlist mode the total sum is hidden
+ *
+ * In wishlist mode the product can be moved to cart,
+ * instead in cart mode the priduct can be moved to wishlist
+ */
 import { mapMutations } from 'vuex'
 
 import mixin from '../mixins'
@@ -43,12 +54,20 @@ export default {
     WishlistIcon
   },
   props: {
+    /**
+       * THe component type
+       * @values cart, wishlist
+       * See the description above about the difference.
+       */
     type: {
       type: String,
       default: 'cart'
     }
   },
   computed: {
+    /**
+       * It calles the method depending of the usage type (cart or wishlist)
+       */
     items () {
       return this.type === 'wishlist' ? this.itemsInWishlist : this.itemsInCart
     }

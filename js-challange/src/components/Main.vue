@@ -18,6 +18,9 @@
 </template>
 
 <script>
+/**
+ * Main component
+ */
 import ItemCard from './ItemCard'
 import Header from './Header'
 import Footer from './Footer'
@@ -38,9 +41,6 @@ export default {
   data () {
     return {
       data: [],
-
-      cartHover: false,
-      wishlistHover: false,
 
       lastPage: lastPage,
       delta: paginationDelta

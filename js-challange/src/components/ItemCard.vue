@@ -23,6 +23,11 @@
 </template>
 
 <script>
+/**
+ * The product card
+ * It shows image, title, description,
+ * price of product and CTA (add/remove to/from cart).
+ */
 import { mapMutations } from 'vuex'
 import mixin from '../mixins'
 import WishlistIcon from '../assets/svg/wishlist'
@@ -34,6 +39,9 @@ export default {
     WishlistIcon
   },
   props: {
+    /**
+    * Single product object
+    */
     item: {
       type: Object,
       default () {
@@ -51,8 +59,12 @@ export default {
     isDiscounted (item) {
       return item?.discount > 0
     },
+    /**
+     * if discount prop is greather than 0,
+     * full price is net_price.formatted_value (to be shown as striked)
+     * and final price will be retail_price.formatted_value
+     */
     getPrice (item) {
-      // if discount prop is greather than 0, full price is net_price.formatted_value (to be shown as striked) and final price will be retail_price.formatted_value -->
       return this.isDiscounted(item) ? item?.net_price?.formatted_value : item?.retail_price?.formatted_value
     },
     isItemInCart (item) {
