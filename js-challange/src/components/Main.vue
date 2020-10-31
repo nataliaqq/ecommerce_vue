@@ -10,7 +10,7 @@
             :key="item.uuid" />
         </ul>
         <Loader v-if="!data || !data.length" />
-        <Pagination @loadPage="loadPage" :firstPage="firstPage" :lastPage="lastPage" :delta="1" />
+        <Pagination @loadPage="loadPage" :lastPage="lastPage" :delta="1" />
       </div>
     </main>
     <Footer />
@@ -43,7 +43,6 @@ export default {
       wishlistHover: false,
 
       lastPage: lastPage,
-      firstPage: firstPage,
       delta: paginationDelta
     }
   },

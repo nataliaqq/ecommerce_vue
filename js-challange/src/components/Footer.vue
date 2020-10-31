@@ -1,6 +1,8 @@
 <template>
-    <footer class="container">
+    <footer>
+      <div class="container">
         <p class="footer__sidenote">Footer</p>
+      </div>
     </footer>
 </template>
 

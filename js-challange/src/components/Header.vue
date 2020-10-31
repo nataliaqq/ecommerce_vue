@@ -1,30 +1,32 @@
 <template>
-    <header class="header container">
-        <h1 class="page-title">BRAND</h1>
-        <aside class="header-bag">
-            <div id="header-item-bag" class="header-item-wrapper" @mouseover="setCartHover(true)" @mouseleave="setCartHover(false)">
-                <div class="header-bag__item header-bag__count">
-                    <div class="header-bag__price">
-                        {{ totalPrice | money }}
+    <header>
+        <div class="container header">
+            <h1 class="page-title">BRAND</h1>
+            <aside class="header-bag">
+                <div id="header-item-bag" class="header-item-wrapper" @mouseover="setCartHover(true)" @mouseleave="setCartHover(false)">
+                    <div class="header-bag__item header-bag__count">
+                        <div class="header-bag__price">
+                            {{ totalPrice | money }}
+                        </div>
+                        <BagIcon />
+                        <span class="bag__item-counter">{{ itemsInCart.length }}</span>
                     </div>
-                    <BagIcon />
-                    <span class="bag__item-counter">{{ itemsInCart.length }}</span>
+                    <Cart
+                        v-show="cartHover"
+                    />
                 </div>
-                <Cart
-                    v-show="cartHover"
-                />
-            </div>
-            <div id="header-item-wishlist" class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
-                <div class="header-bag__item header-bag__wishlist-count">
-                    <WishlistIcon />
-                    <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
+                <div id="header-item-wishlist" class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
+                    <div class="header-bag__item header-bag__wishlist-count">
+                        <WishlistIcon />
+                        <span class="bag__item-counter">{{ itemsInWishlist.length }}</span>
+                    </div>
+                    <Cart
+                        v-show="wishlistHover"
+                        type="wishlist"
+                    />
                 </div>
-                 <Cart
-                    v-show="wishlistHover"
-                    type="wishlist"
-                />
-            </div>
-        </aside>
+            </aside>
+        </div>
     </header>
 </template>
 
@@ -65,6 +67,9 @@ header {
     position: fixed;
     z-index: 1;
     top: 0;
+    width: 100%;
+    padding: 0 40px;
+    margin: 0 auto;
 }
 aside {
     height: 100%;
