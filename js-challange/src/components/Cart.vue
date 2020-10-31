@@ -4,7 +4,7 @@
             <span v-if="type === 'cart'">Your cart</span>
             <span v-if="type === 'wishlist'">Your wishlit</span>
         </div>
-        <div v-for="item in items" :key="item.uuid" class="product-in-cart__container">
+        <div v-for="(item, index) in items" :key="`${item.uuid}-${index}`" class="product-in-cart__container">
             <div class="product-in-cart__image-container">
                 <img class="product__image" :src="`${item.cover_image_url}?q=60&fit=crop&w=200`" :alt="item.title" itemprop="image"/>
             </div>

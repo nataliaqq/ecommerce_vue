@@ -44,7 +44,8 @@ describe('Cart', () => {
   it('product can be moved to wishlist correctly', () => {
     cart.find('.move-to-button').trigger('click')
     cart.vm.$nextTick().then(() => {
-        expect(cart.vm.items).toEqual([])
+      expect(cart.vm.items).toEqual([])
+    }).catch(() => {
     })
   })
   it('if product is already in wishlist there is no move button', () => {
@@ -55,7 +56,7 @@ describe('Cart', () => {
             itemsInWishlist: () => [expectedItem]
         }
     })
-    expect(cart.contains('.move-to-button')).toBe(false)
+    expect(cart.find('.move-to-button').exists()).toBeFalsy()
   })
   it('show right total sum', () => {
     cart = shallowMount(Cart, {

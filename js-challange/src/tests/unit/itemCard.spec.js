@@ -60,7 +60,8 @@ describe('ItemCard', () => {
       itemCard.find('.product__add-to-cart').trigger('click')
       expect(storeMocks.mutations.removeFromCart).toBeCalled()
       expect(storeMocks.mutations.addToCart).not.toBeCalled()
-    });
+    }).catch(() => {
+    })
   })
 
   it('removes item from cart by button click', () => {
@@ -76,7 +77,8 @@ describe('ItemCard', () => {
       itemCard.find('.product__wishlist-button').trigger('click')
       expect(storeMocks.mutations.removeFromWishlist).toBeCalled()
       expect(storeMocks.mutations.addToWishlist).not.toBeCalled()
-    });
+    }).catch(() => {
+    })
   })
-});
+})
   
