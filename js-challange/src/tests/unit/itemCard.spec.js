@@ -12,23 +12,23 @@ localVue.use(Vuex)
 
 describe('ItemCard', () => {
   let itemCard
-  let props
-  let storeMocks
+
+  const storeMocks = createStoreMocks();
+
+  const options = {
+    propsData: {
+      item: expectedItem,
+    },
+    computed: {
+      itemsInCart: () => [],
+      itemsInWishlist: () => []
+    },
+    store: storeMocks.store,
+    localVue
+  }
 
   beforeEach(() => {
-      storeMocks = createStoreMocks();
-
-      itemCard = shallowMount(ItemCard, {
-        propsData: {
-          item: expectedItem,
-        },
-        computed: {
-          itemsInCart: () => [],
-          itemsInWishlist: () => []
-        },
-        store: storeMocks.store,
-        localVue
-      })
+    itemCard = shallowMount(ItemCard, options)
   });
 
   it('product renders correctly', () => {
@@ -38,44 +38,44 @@ describe('ItemCard', () => {
   it('adds item to cart by button click', () => {
     itemCard.find('.product__add-to-cart').trigger('click')
     expect(storeMocks.mutations.addToCart).toBeCalled()
+    expect(storeMocks.mutations.removeFromCart).not.toBeCalled()
+  })
+  
+  it('adds item to wishlist by button click', () => {
+    itemCard.find('.product__wishlist-button').trigger('click')
+    expect(storeMocks.mutations.addToWishlist).toBeCalled()
+    expect(storeMocks.mutations.removeFromWishlist).not.toBeCalled()
   })
 
   it('removes item from cart by button click', () => {
     itemCard = shallowMount(ItemCard, {
-      propsData: props,
+      ...options,
       computed: {
         itemsInCart: () => [expectedItem],
         itemsInWishlist: () => []
-      },
-      store: storeMocks,
-      localVue
+      }
     })
 
     itemCard.vm.$nextTick().then(() => {
       itemCard.find('.product__add-to-cart').trigger('click')
       expect(storeMocks.mutations.removeFromCart).toBeCalled()
+      expect(storeMocks.mutations.addToCart).not.toBeCalled()
     });
-  })
-
-  it('adds item to wishlist by button click', () => {
-    itemCard.find('.product__wishlist-button').trigger('click')
-    expect(storeMocks.mutations.addToWishlist).toBeCalled()
   })
 
   it('removes item from cart by button click', () => {
     itemCard = shallowMount(ItemCard, {
-      propsData: props,
+      ...options,
       computed: {
         itemsInCart: () => [],
         itemsInWishlist: () => [expectedItem]
-      },
-      store: storeMocks,
-      localVue
+      }
     })
 
     itemCard.vm.$nextTick().then(() => {
       itemCard.find('.product__wishlist-button').trigger('click')
       expect(storeMocks.mutations.removeFromWishlist).toBeCalled()
+      expect(storeMocks.mutations.addToWishlist).not.toBeCalled()
     });
   })
 });
