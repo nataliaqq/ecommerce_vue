@@ -56,15 +56,11 @@ describe('ItemCard', () => {
       }
     })
 
-    itemCard.vm.$nextTick().then(() => {
-      itemCard.find('.product__add-to-cart').trigger('click')
-      expect(storeMocks.mutations.removeFromCart).toBeCalled()
-      expect(storeMocks.mutations.addToCart).not.toBeCalled()
-    }).catch(() => {
-    })
+    itemCard.find('.product__add-to-cart').trigger('click')
+    expect(storeMocks.mutations.removeFromCart).toBeCalled()
   })
 
-  it('removes item from cart by button click', () => {
+  it('removes item from wishlist by button click', () => {
     itemCard = shallowMount(ItemCard, {
       ...options,
       computed: {
@@ -73,11 +69,7 @@ describe('ItemCard', () => {
       }
     })
 
-    itemCard.vm.$nextTick().then(() => {
-      itemCard.find('.product__wishlist-button').trigger('click')
-      expect(storeMocks.mutations.removeFromWishlist).toBeCalled()
-      expect(storeMocks.mutations.addToWishlist).not.toBeCalled()
-    }).catch(() => {
-    })
+    itemCard.find('.product__wishlist-button').trigger('click')
+    expect(storeMocks.mutations.removeFromWishlist).toBeCalled()
   })
 })
