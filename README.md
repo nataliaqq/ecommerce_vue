@@ -1,1 +1,0 @@
-js_challenge_natalia-svistunova
