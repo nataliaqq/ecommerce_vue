@@ -12,7 +12,7 @@
                         <span class="bag__item-counter">{{ itemsInCart.length }}</span>
                     </div>
                     <Cart
-                        v-show="true"
+                        v-show="cartHover"
                     />
                 </div>
                 <div id="header-item-wishlist" class="header-item-wrapper" @mouseover="setWishlistHover(true)" @mouseleave="setWishlistHover(false)">
