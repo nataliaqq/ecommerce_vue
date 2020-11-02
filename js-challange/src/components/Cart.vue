@@ -83,7 +83,7 @@ export default {
       'removeFromWishlist'
     ]),
     remove (item) {
-     /**
+      /**
        * It calls the method depending of the usage type (cart or wishlist)
        */
       if (this.type === 'cart') this.removeFromCart(item)
