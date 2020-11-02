@@ -118,6 +118,8 @@ export default {
     top: 50px;
     background: white;
     z-index: 9;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 .title {
     padding: 20px;
@@ -146,9 +148,9 @@ export default {
 }
 
 .product-in-cart__image-container {
-    flex-basis: 200px;
     padding-right: 10px;
     min-width: 100px;
+    max-width: 100px;
 }
 
 .remove-button {
@@ -203,6 +205,9 @@ export default {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    background: white;
+    position: sticky;
+    bottom: -1px;
 }
 
 .total-amount {
