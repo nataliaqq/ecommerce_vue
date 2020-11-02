@@ -10,7 +10,7 @@ From the cart it's possible to move item from cart to the wishlist (star icon in
 If same product in the same time is presented in the cart and wishlist the option is not available.
 
 ## DEMO
-I've deployed a demo from /js-challenge/dist folder here
+I've deployed a demo from /dist folder here
 https://determined-lumiere-6dee03.netlify.app
 
 ## Project setup
