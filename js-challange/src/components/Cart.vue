@@ -69,8 +69,8 @@ export default {
   },
   computed: {
     /**
-       * It calles the method depending of the usage type (cart or wishlist)
-       */
+     * It returns products depending of the usage type (cart or wishlist)
+     */
     items () {
       return this.type === 'wishlist' ? this.itemsInWishlist : this.itemsInCart
     }
@@ -83,6 +83,9 @@ export default {
       'removeFromWishlist'
     ]),
     remove (item) {
+     /**
+       * It calls the method depending of the usage type (cart or wishlist)
+       */
       if (this.type === 'cart') this.removeFromCart(item)
       if (this.type === 'wishlist') this.removeFromWishlist(item)
     },

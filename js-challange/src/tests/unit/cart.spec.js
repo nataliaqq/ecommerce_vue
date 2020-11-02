@@ -12,6 +12,7 @@ localVue.use(Vuex)
 
 describe('Cart', () => {
   let cart
+  let wishlist
 
   const storeMocks = createStoreMocks()
 
@@ -29,26 +30,55 @@ describe('Cart', () => {
 
   beforeEach(() => {
     cart = shallowMount(Cart, options)
+    wishlist = shallowMount(Cart,
+      { 
+        ...options,
+        propsData: { type: 'wishlist' },
+        computed: {
+          itemsInCart: () => [],
+          itemsInWishlist: () => [expectedItem]
+        }
+      }
+    )
   })
 
-  it('product in cart renders correctly', () => {
+  it('does not allow any other type prop expect cart or wishlist', () => {
+    expect(cart.vm.$options.props.type.validator('cart')).toBe(true)
+    expect(cart.vm.$options.props.type.validator('wishlist')).toBe(true)
+    expect(cart.vm.$options.props.type.validator('somwthingWrong')).toBe(false)
+  })
+
+  it('renders product in cart correctly', () => {
     expect(cart.find('.product-in-cart__title').text()).toEqual(cart.vm.items[0].title)
+    expect(wishlist.find('.product-in-cart__title').text()).toEqual(wishlist.vm.items[0].title)
   })
 
-  it('product can be removed from cart correctly', () => {
+  it('return products depending of type correctly', () => {
+    expect(cart.vm.items).toEqual([expectedItem])
+    expect(wishlist.vm.items).toEqual([expectedItem])
+  })
+
+  it('removes product from cart/wishlist correctly', () => {
     cart.find('.remove-button').trigger('click')
     expect(storeMocks.mutations.removeFromCart).toBeCalled()
     expect(storeMocks.mutations.addToCart).not.toBeCalled()
+
+    wishlist.find('.remove-button').trigger('click')
+    expect(storeMocks.mutations.removeFromWishlist).toBeCalled()
+    expect(storeMocks.mutations.addToWishlist).not.toBeCalled()
   })
 
-  it('product can be moved to wishlist correctly', () => {
+  it('moves product to wishlist/cart correctly', () => {
     cart.find('.move-to-button').trigger('click')
-    cart.vm.$nextTick().then(() => {
-      expect(cart.vm.items).toEqual([])
-    }).catch(() => {
-    })
+    expect(storeMocks.mutations.removeFromCart).toBeCalled()
+    expect(storeMocks.mutations.addToWishlist).toBeCalled()
+
+    wishlist.find('.move-to-button').trigger('click')
+    expect(storeMocks.mutations.removeFromWishlist).toBeCalled()
+    expect(storeMocks.mutations.addToWishlist).toBeCalled()
   })
-  it('if product is already in wishlist there is no move button', () => {
+
+  it('doesn\'t render move button if product is already in wishlist/cart', () => {
     cart = shallowMount(Cart, {
       ...options,
       computed: {
@@ -57,8 +87,27 @@ describe('Cart', () => {
       }
     })
     expect(cart.find('.move-to-button').exists()).toBeFalsy()
+
+    wishlist = shallowMount(Cart, {
+      ...options,
+      propsData: { type: 'wishlist ' },
+      computed: {
+        itemsInCart: () => [expectedItem],
+        itemsInWishlist: () => [expectedItem]
+      }
+    })
+    expect(cart.find('.move-to-button').exists()).toBeFalsy()
   })
-  it('show right total sum', () => {
+
+  it('detects item in cart/wishlist correctly', () => {
+    expect(cart.vm.isItemInCart(expectedItem)).toBe(true)
+    expect(wishlist.vm.isItemInCart(expectedItem)).toBe(false)
+
+    expect(cart.vm.isItemInWishlist(expectedItem)).toBe(false)
+    expect(wishlist.vm.isItemInWishlist(expectedItem)).toBe(true)
+  })
+
+  it('shows right total sum in cart', () => {
     cart = shallowMount(Cart, {
       ...options,
       computed: {
