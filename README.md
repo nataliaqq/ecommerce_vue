@@ -1,5 +1,3 @@
-# js-challenge
-
 This is the example of e-commerce application. You can add products to the cart or to wishlist (star symbol in the corner of product card).
 Once item is added to wishlist or cart you can see that the counter is changed.
 
