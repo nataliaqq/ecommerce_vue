@@ -63,6 +63,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.page-title {
+    font-size: 20px;
+}
+
 header {
     position: fixed;
     z-index: 1;
@@ -73,8 +78,12 @@ header {
 }
 .header {
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
+
 aside {
     height: 100%;
     align-items: center;
@@ -90,4 +99,60 @@ aside {
     display: flex;
     align-items: center;
 }
+
+.bag__item-counter {
+    width: 13px;
+    height: 13px;
+    margin-left: -1px;
+
+    display: flex;
+    align-self: flex-start;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Lato-Bold', sans-serif;
+    font-size: 8px;
+    text-align: center;
+
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: #358ED7;
+}
+
+.header-bag {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.header-bag__item {
+    height: 25px;
+
+    display: flex;
+    align-items: flex-end;
+}
+
+.header-bag__item .icon {
+    height: auto;
+    fill: #444A59;
+}
+
+.header-bag__price {
+    margin-right: 5px;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.header-bag__count {
+    margin-left: 10px;
+}
+
+.header-bag__count .icon {
+    width: 17px;
+}
+
+.header-bag__wishlist-count {
+    margin-left: 10px;
+}
+
 </style>

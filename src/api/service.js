@@ -2,6 +2,6 @@ import API from './index'
 
 export default {
   getStore (params) {
-    return API.get(`/venues/164/activities?limit=${params?.limit || 6}&offset=${params?.offset || 0}`)
+    return API.get('/6805a4d9-1eaf-47cf-a422-59e9b79f76fb')
   }
 }

@@ -129,20 +129,55 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.pagination {
+    height: 45px;
+    margin: 30px auto;
+    text-align: center;
+}
+
 .pagination__list {
+    height: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
     max-width: 400px;
     width: 100%;
     justify-content: space-around;
 }
+
 .pagination__item {
+    height: 100%;
+    width: 45px;
+    font-family: 'Lato-Bold', sans-serif;
+    letter-spacing: 1.39px;
+    text-align: center;
     font-size: 16px;
+    &.active {
+        font-weight: bold;
+    }
     @media (max-width: 768px) {
         font-size: 14px;
     }
 }
-.pagination__item {
-    &.active {
-        font-weight: bold;
-    }
+
+.pagination__link,
+.pagination__item span {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #444A59;
 }
+
+.pagination__link:hover {
+    text-decoration: underline;
+}
+
+.pagination__link .icon {
+    width: 8px;
+    fill: #444A59;
+}
+
 </style>

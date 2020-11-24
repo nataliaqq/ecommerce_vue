@@ -1,5 +1,5 @@
 export const env = {
-  API_ENDPOINT: 'https://api.musement.com'
+  API_ENDPOINT: 'https://jsonstorage.net'
 }
 
 export default env
