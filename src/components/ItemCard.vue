@@ -173,26 +173,6 @@ export default {
     outline: none;
 }
 
-.button--primary {
-    padding: 13px;
-
-    font-family: 'Lato-Bold', sans-serif;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1.39px;
-}
-
-.button--primary:hover {
-    border: 1px solid #444A59;
-    color: #ffffff;
-    background-color: #444A59;
-}
-
-.button--round {
-    display: block;
-    border-radius: 50%;
-}
-
 .button--wishlist:hover {
     border: 1px solid #444A59;
 }
