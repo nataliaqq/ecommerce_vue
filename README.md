@@ -1,4 +1,4 @@
-This is the example of e-commerce application. You can add products to the cart or to wishlist (star symbol in the corner of product card).
+This is the example of simple e-commerce application. You can add products to the cart or to wishlist (star symbol in the corner of product card).
 Once item is added to wishlist or cart you can see that the counter is changed.
 
 To see list of items in cart or wishlst hover the bag or star icon in the header. Small bag/wishlist should appear.
